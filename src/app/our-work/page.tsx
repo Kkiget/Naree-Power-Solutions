@@ -1,3 +1,5 @@
+import Footer from '@/components/Footer';
+
 export default function Page() {
   return (
     <div className="min-h-screen py-20">
@@ -54,6 +56,7 @@ export default function Page() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

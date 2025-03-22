@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Footer from '@/components/Footer';
 
 export default function Page() {
   const [cart, setCart] = useState([
@@ -55,6 +56,7 @@ export default function Page() {
           </div>
         </div>
       </div>
+      <Footer />
     </main>
   );
 }

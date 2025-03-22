@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Footer from '@/components/Footer';
 
 interface Product {
   id: string;
@@ -69,6 +70,7 @@ export default function Page() {
           ))}
         </div>
       </div>
+      <Footer />
     </main>
   );
 }

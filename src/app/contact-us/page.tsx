@@ -1,4 +1,6 @@
-export default function ContactUs() {
+import Footer from '@/components/Footer';
+
+export default function Page() {
   return (
     <div className="min-h-screen py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -47,6 +49,7 @@ export default function ContactUs() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
