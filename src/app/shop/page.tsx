@@ -10,7 +10,7 @@ interface Product {
   image: string;
 }
 
-export default function ShopPage() {
+export default function Page() {
   const [cart, setCart] = useState<Product[]>([]);
 
   const addToCart = (product: Product) => {
