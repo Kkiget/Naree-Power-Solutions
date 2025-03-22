@@ -33,6 +33,7 @@ export default function RootLayout({
                 <a href="/news-and-highlights" className="text-gray-600 hover:text-gray-900">News & Highlights</a>
                 <a href="/careers" className="text-gray-600 hover:text-gray-900">Careers</a>
                 <a href="/contact-us" className="text-gray-600 hover:text-gray-900">Contact Us</a>
+                <a href="/shop" className="text-gray-600 hover:text-gray-900">Shop</a>
               </div>
             </div>
           </div>
