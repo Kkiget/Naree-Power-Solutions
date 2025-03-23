@@ -30,10 +30,10 @@ export default function RootLayout({
                 <a href="/about-us" className="text-gray-600 hover:text-gray-900">About Us</a>
                 <a href="/services" className="text-gray-600 hover:text-gray-900">Services</a>
                 <a href="/our-work" className="text-gray-600 hover:text-gray-900">Our Work</a>
-                <a href="/news-and-highlights" className="text-gray-600 hover:text-gray-900">News & Highlights</a>
+                <a href="/news" className="text-gray-600 hover:text-gray-900">News</a>
                 <a href="/careers" className="text-gray-600 hover:text-gray-900">Careers</a>
-                <a href="/contact-us" className="text-gray-600 hover:text-gray-900">Contact Us</a>
                 <a href="/shop" className="text-gray-600 hover:text-gray-900">Shop</a>
+                <a href="/contact-us" className="text-gray-600 hover:text-gray-900">Contact Us</a>
               </div>
             </div>
           </div>
