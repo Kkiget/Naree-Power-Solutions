@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -56,25 +56,22 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3">
               {[
-                "Power Systems",
-                "Maintenance Services",
-                "Energy Efficiency",
-                "Safety & Quality",
-                "Solar Installations",
-                "Energy Audits"
+                "Renewable Energy Solutions",
+                "Power Backup Solutions",
+                "Electrical Engineering & Grid Solutions",
+                "Energy Efficiency & Management",
+                "Industrial & Commercial Solutions",
+                "Off-Grid & Rural Electrification"
               ].map((service, index) => (
                 <li 
                   key={index} 
-                  className="text-gray-400 hover:text-white group transition-all duration-300"
-                  style={{ transitionDelay: `${index * 50}ms` }}
+                  className="text-gray-400 hover:text-white transition-colors duration-300"
                 >
                   <Link 
                     href="/services" 
-                    className="inline-flex items-center group"
+                    className="inline-flex items-center"
                   >
-                    <span className="transform transition-transform duration-300 group-hover:translate-x-2">
-                      {service}
-                    </span>
+                    {service}
                   </Link>
                 </li>
               ))}

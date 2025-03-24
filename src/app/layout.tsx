@@ -1,7 +1,8 @@
 import { type Metadata } from "next";
 import "./globals.css";
 import "./fonts.css";
-import ClientLayout from "./client-layout";
+import { ReactNode } from "react";
+import ClientLayout from "@/components/ClientLayout";
 
 export const metadata: Metadata = {
   title: "Naree Power Solutions",
@@ -36,7 +37,15 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: ReactNode
 }) {
-  return <ClientLayout>{children}</ClientLayout>;
+  return (
+    <html lang="en">
+      <body className="font-poppins antialiased">
+        <ClientLayout>
+          {children}
+        </ClientLayout>
+      </body>
+    </html>
+  );
 }

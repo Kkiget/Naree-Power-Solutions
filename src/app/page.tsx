@@ -1,11 +1,12 @@
 import Link from "next/link";
 import Image from 'next/image';
-import { FaBolt, FaTools, FaLightbulb, FaShieldAlt } from 'react-icons/fa';
+import { FaBolt, FaTools, FaLightbulb, FaShieldAlt, FaPlug, FaBatteryFull, FaSolarPanel, FaWater, FaTint, FaCog, FaChartLine, FaClipboardList, FaTachometerAlt, FaCogs, FaChartArea, FaMapMarkedAlt } from 'react-icons/fa';
 import Testimonials from "@/components/Testimonials";
 import Newsletter from "@/components/Newsletter";
 import NewsInsights from "@/components/NewsInsights";
 import EnergySavingsCalculator from "@/components/EnergySavingsCalc";
 import ProjectShowcase from "@/components/ProjectShowcase";
+import ServiceCard from "@/components/ServiceCard";
 
 export default function Home() {
   return (
@@ -24,14 +25,14 @@ export default function Home() {
               className="transition-transform duration-700 ease-out"
             />
           </div>
-          <div className="absolute inset-0 bg-black bg-opacity-40" /> {/* Lighter overlay for better visibility */}
+          <div className="absolute inset-0 bg-black bg-opacity-40" />
         </div>
 
         <div className="relative z-10 container mx-auto px-4 text-center text-white fade-in">
           <h1 className="font-display text-display-2xl md:text-display-xl lg:text-display-2xl font-bold mb-8 tracking-tight">
             Empowering Kenya with <span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-orange-600">Reliable Energy</span>
           </h1>
-          <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto font-light leading-relaxed tracking-wide">
+          <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto font-light leading-relaxed tracking-wide text-white">
             Sustainable power solutions for homes, businesses, and communities across the continent
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -81,36 +82,45 @@ export default function Home() {
               Comprehensive power solutions tailored to your specific needs
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                icon: FaBolt,
-                title: "Power Systems",
-                description: "Complete power system design and implementation"
+                icon: FaSolarPanel,
+                title: "Renewable Energy Solutions",
+                description: "Design, installation, and maintenance of solar photovoltaic (PV) systems for homes, businesses, and industries"
+              },
+              {
+                icon: FaBatteryFull,
+                title: "Power Backup Solutions",
+                description: "Supply and installation of UPS systems and battery storage solutions for reliable power supply"
               },
               {
                 icon: FaTools,
-                title: "Maintenance",
-                description: "Preventive and corrective maintenance services"
+                title: "Electrical Engineering & Grid Solutions",
+                description: "Professional wiring, panel installation, and power distribution services for buildings and industries"
               },
               {
                 icon: FaLightbulb,
-                title: "Energy Efficiency",
-                description: "Smart solutions for optimal power usage"
+                title: "Energy Efficiency & Management",
+                description: "Comprehensive energy assessments and smart metering systems for optimal energy usage"
               },
               {
-                icon: FaShieldAlt,
-                title: "Safety & Quality",
-                description: "Adherence to international safety standards"
+                icon: FaCogs,
+                title: "Industrial & Commercial Solutions",
+                description: "Automation systems and power factor correction for industrial and commercial clients"
+              },
+              {
+                icon: FaMapMarkedAlt,
+                title: "Off-Grid & Rural Electrification",
+                description: "Design and implementation of off-grid power solutions for rural communities"
               }
             ].map((service, index) => (
-              <div key={index} className="card-apple hover:scale-105 p-8 transition-all duration-300 rounded-3xl shadow-lg hover:shadow-xl bg-white border border-gray-100">
-                <div className="text-5xl text-orange-500 mb-4">
-                  <service.icon />
-                </div>
-                <h3 className="text-xl font-bold mb-3 text-[#696969]">{service.title}</h3>
-                <p className="text-[#696969]">{service.description}</p>
-              </div>
+              <ServiceCard 
+                key={index} 
+                icon={service.icon} 
+                title={service.title} 
+                description={service.description} 
+              />
             ))}
           </div>
         </div>
