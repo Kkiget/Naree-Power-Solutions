@@ -76,8 +76,8 @@ export default function Home() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Our <span className="text-gradient">Services</span></h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold mb-4 text-[#696969]">Our <span className="text-gradient">Services</span></h2>
+            <p className="text-[#696969] max-w-2xl mx-auto">
               Comprehensive power solutions tailored to your specific needs
             </p>
           </div>
@@ -108,8 +108,8 @@ export default function Home() {
                 <div className="text-5xl text-orange-500 mb-4">
                   <service.icon />
                 </div>
-                <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-                <p className="text-gray-600">{service.description}</p>
+                <h3 className="text-xl font-bold mb-3 text-[#696969]">{service.title}</h3>
+                <p className="text-[#696969]">{service.description}</p>
               </div>
             ))}
           </div>
@@ -138,7 +138,7 @@ export default function Home() {
         </div>
         <div className="relative z-10 container mx-auto px-4 text-center text-white">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Ready to <span className="text-gradient">Transform</span> Your Energy?</h2>
-          <p className="text-xl mb-10 max-w-2xl mx-auto font-light">
+          <p className="text-xl mb-10 max-w-2xl mx-auto font-light text-white">
             Let us help you achieve reliable and efficient power systems for your business or home
           </p>
           <Link 

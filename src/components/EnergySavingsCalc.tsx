@@ -35,10 +35,10 @@ const EnergySavingsCalculator = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">
+            <h2 className="text-4xl font-bold mb-4 text-[#696969]">
               Calculate Your <span className="text-gradient">Energy Savings</span>
             </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            <p className="text-[#696969] text-lg max-w-2xl mx-auto">
               See how much you could save by switching to solar power with our solutions
             </p>
           </div>
@@ -47,7 +47,7 @@ const EnergySavingsCalculator = () => {
             <div className="grid md:grid-cols-12 gap-8">
               <div className="md:col-span-5 space-y-8">
                 <div className="space-y-4">
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-[#333333]">
                     Monthly Electricity Bill ($)
                   </label>
                   <div className="relative">
@@ -72,7 +72,7 @@ const EnergySavingsCalculator = () => {
                 </div>
                 
                 <div className="space-y-4">
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-[#333333]">
                     Average Daily Sunlight Hours
                   </label>
                   <div className="relative">
@@ -97,7 +97,7 @@ const EnergySavingsCalculator = () => {
                 </div>
                 
                 <div className="space-y-4">
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-[#333333]">
                     System Size (kW)
                   </label>
                   <div className="relative">
@@ -128,17 +128,17 @@ const EnergySavingsCalculator = () => {
                   
                   <div className="space-y-4">
                     <div className="flex justify-between items-center border-b border-white/20 pb-4">
-                      <span>Monthly Savings:</span>
+                      <p className="text-white mb-1">Monthly Savings:</p>
                       <span className="text-2xl font-bold">${savings.monthly}</span>
                     </div>
                     
                     <div className="flex justify-between items-center border-b border-white/20 pb-4">
-                      <span>Annual Savings:</span>
+                      <p className="text-white mb-1">Annual Savings:</p>
                       <span className="text-2xl font-bold">${savings.annual}</span>
                     </div>
                     
                     <div className="flex justify-between items-center pb-2">
-                      <span>20 Year Savings:</span>
+                      <p className="text-white mb-1">20 Year Savings:</p>
                       <span className="text-3xl font-bold">${savings.twentyYear.toLocaleString()}</span>
                     </div>
                   </div>
@@ -153,7 +153,7 @@ const EnergySavingsCalculator = () => {
             </div>
           </div>
           
-          <div className="mt-12 text-center text-gray-500 text-sm">
+          <div className="mt-12 text-center text-[#696969] text-sm">
             <p>This calculator provides estimates based on average values. Actual savings may vary based on your specific location, energy usage patterns, and local electricity rates.</p>
           </div>
         </div>

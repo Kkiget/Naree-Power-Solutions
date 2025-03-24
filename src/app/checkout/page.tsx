@@ -27,12 +27,12 @@ export default function Checkout() {
                 ].map((step, index) => (
                   <div key={index} className="flex items-center">
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                      step.active ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-600'
+                      step.active ? 'bg-orange-500 text-white' : 'bg-gray-200 text-[#696969]'
                     }`}>
                       {index + 1}
                     </div>
                     <span className={`ml-2 ${
-                      step.active ? 'text-gray-900 font-semibold' : 'text-gray-500'
+                      step.active ? 'text-gray-900 font-semibold' : 'text-[#696969]'
                     }`}>
                       {step.title}
                     </span>
@@ -145,7 +145,7 @@ export default function Checkout() {
                   </div>
                   <div>
                     <h3 className="font-semibold">{badge.title}</h3>
-                    <p className="text-sm text-gray-600">{badge.description}</p>
+                    <p className="text-sm text-[#696969]">{badge.description}</p>
                   </div>
                 </div>
               ))}

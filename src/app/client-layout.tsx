@@ -36,15 +36,15 @@ export default function ClientLayout({
                   className="h-12 w-auto"
                   priority
                 />
-                <span className="text-2xl font-semibold text-gray-900">NAREE POWER</span>
+                <span className="text-2xl font-bold text-gray-900 tracking-tight font-['ShareTech'] -mt-1">NAREE POWER</span>
               </a>
             </div>
             <div className="hidden lg:flex lg:gap-x-12">
               {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-sm font-semibold leading-6 text-gray-900 hover:text-primary-600"
+                <a 
+                  key={item.name} 
+                  href={item.href} 
+                  className="text-sm font-semibold leading-6 text-black hover:text-primary-600 transition-colors duration-200"
                 >
                   {item.name}
                 </a>

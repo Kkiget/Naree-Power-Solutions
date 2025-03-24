@@ -24,7 +24,7 @@ export default function Careers() {
       {/* Why Join Us Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Why Join Naree Power Solutions?</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-[#696969]">Why Join Naree Power Solutions?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
@@ -47,8 +47,8 @@ export default function Careers() {
                 <div className="text-4xl text-orange-500 mb-4 flex justify-center">
                   <benefit.icon />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{benefit.title}</h3>
-                <p className="text-gray-600">{benefit.description}</p>
+                <h3 className="text-xl font-semibold mb-3 text-[#696969]">{benefit.title}</h3>
+                <p className="text-[#696969]">{benefit.description}</p>
               </div>
             ))}
           </div>
@@ -58,7 +58,7 @@ export default function Careers() {
       {/* Current Openings */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Current Openings</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-[#696969]">Current Openings</h2>
           <div className="max-w-3xl mx-auto space-y-6">
             {[
               {
@@ -80,8 +80,8 @@ export default function Careers() {
               <div key={index} className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex flex-col md:flex-row md:items-center justify-between">
                   <div>
-                    <h3 className="text-xl font-semibold mb-2">{job.title}</h3>
-                    <p className="text-gray-600">{job.location} • {job.type}</p>
+                    <h3 className="text-xl font-semibold mb-2 text-[#696969]">{job.title}</h3>
+                    <p className="text-[#696969]">{job.location} • {job.type}</p>
                   </div>
                   <Link 
                     href={`/careers/${job.title.toLowerCase().replace(/\s+/g, '-')}`}
@@ -103,8 +103,8 @@ export default function Careers() {
         </div>
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-6">Don't See the Right Fit?</h2>
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-            We're always looking for talented individuals. Send us your resume and we'll keep you in mind for future opportunities.
+          <p className="text-[#696969] mb-8 max-w-2xl mx-auto">
+            Join our team and be part of Africa's energy transformation
           </p>
           <Link 
             href="/contact-us"

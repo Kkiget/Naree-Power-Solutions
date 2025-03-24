@@ -96,7 +96,7 @@ const ProjectShowcase = () => {
   return (
     <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-12">Our <span className="text-gradient">Featured Projects</span></h2>
+        <h2 className="text-4xl font-bold text-center mb-12 text-[#696969]">Our <span className="text-gradient">Featured Projects</span></h2>
         
         <div className="relative overflow-hidden">
           <div className={`card-apple max-w-6xl mx-auto transition-all duration-500 ${isTransitioning ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
@@ -117,27 +117,27 @@ const ProjectShowcase = () => {
                 <div className="space-y-4">
                   <div>
                     <span className="text-sm font-medium text-orange-500">{projects[activeProject].location}</span>
-                    <h3 className="text-2xl font-bold mt-1">{projects[activeProject].title}</h3>
+                    <h3 className="text-2xl font-bold mt-1 text-[#696969]">{projects[activeProject].title}</h3>
                   </div>
                   
-                  <p className="text-gray-600">{projects[activeProject].description}</p>
+                  <p className="text-[#333333]">{projects[activeProject].description}</p>
                   
                   <div className="mt-8 grid grid-cols-2 gap-4">
                     <div className="bg-gray-50 p-4 rounded-xl">
-                      <span className="text-xs text-gray-500">CAPACITY</span>
-                      <p className="text-lg font-semibold">{projects[activeProject].metrics.energySavings}</p>
+                      <span className="text-xs text-[#333333]">CAPACITY</span>
+                      <p className="text-lg font-medium text-[#696969]">{projects[activeProject].metrics.energySavings}</p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-xl">
-                      <span className="text-xs text-gray-500">ANNUAL OUTPUT</span>
-                      <p className="text-lg font-semibold">{projects[activeProject].metrics.costReduction}</p>
+                      <span className="text-xs text-[#333333]">ANNUAL OUTPUT</span>
+                      <p className="text-lg font-medium text-[#696969]">{projects[activeProject].metrics.costReduction}</p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-xl">
-                      <span className="text-xs text-gray-500">COST SAVINGS</span>
-                      <p className="text-lg font-semibold">{projects[activeProject].metrics.carbonReduction}</p>
+                      <span className="text-xs text-[#333333]">COST SAVINGS</span>
+                      <p className="text-lg font-medium text-[#696969]">{projects[activeProject].metrics.carbonReduction}</p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-xl">
-                      <span className="text-xs text-gray-500">CO₂ REDUCTION</span>
-                      <p className="text-lg font-semibold">{projects[activeProject].metrics.carbonReduction}</p>
+                      <span className="text-xs text-[#333333]">CO₂ REDUCTION</span>
+                      <p className="text-lg font-medium text-[#696969]">{projects[activeProject].metrics.carbonReduction}</p>
                     </div>
                   </div>
                 </div>

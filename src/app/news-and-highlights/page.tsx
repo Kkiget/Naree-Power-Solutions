@@ -14,8 +14,8 @@ export default function NewsAndHighlights() {
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
               News & Highlights
             </h1>
-            <p className="text-lg text-gray-300 mb-8">
-              Stay updated with the latest from Naree Power Solutions
+            <p className="text-lg text-[#696969] mb-8 max-w-2xl mx-auto">
+              Stay updated with our latest news and insights
             </p>
           </div>
         </div>
@@ -59,7 +59,7 @@ export default function NewsAndHighlights() {
                       {new Date(news.date).toLocaleDateString()}
                     </div>
                     <h3 className="text-xl font-bold mb-3">{news.title}</h3>
-                    <p className="text-gray-600">{news.description}</p>
+                    <p className="text-[#696969]">{news.description}</p>
                   </div>
                 </div>
               </Link>
@@ -75,7 +75,7 @@ export default function NewsAndHighlights() {
         </div>
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-6">Stay Connected</h2>
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-[#696969] mb-8 max-w-2xl mx-auto">
             Subscribe to our newsletter for the latest updates and industry insights
           </p>
           <Link 

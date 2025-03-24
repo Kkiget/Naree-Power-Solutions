@@ -48,7 +48,7 @@ const NewsInsights = () => {
           <h2 className="font-display text-display-lg mb-4 text-gray-900">
             News & <span className="text-gradient">Insights</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-[#696969] max-w-2xl mx-auto leading-relaxed">
             Stay updated with the latest developments in renewable energy and power solutions
           </p>
         </div>

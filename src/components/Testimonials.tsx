@@ -93,7 +93,7 @@ const Testimonials = () => {
           <h2 className="font-display text-display-lg text-white mb-4">
             What Our <span className="text-gradient">Clients Say</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-[#696969] max-w-2xl mx-auto leading-relaxed">
             Hear from our satisfied clients about their experience with Naree Power Solutions
           </p>
         </div>

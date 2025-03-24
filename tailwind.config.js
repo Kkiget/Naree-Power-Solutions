@@ -11,6 +11,9 @@ module.exports = {
         sans: ['Poppins', 'system-ui', 'sans-serif'],
         display: ['Poppins', 'system-ui', 'sans-serif'],
         poppins: ['Poppins', 'system-ui', 'sans-serif'],
+        'poppins-bold': ['poppins-bold', 'sans-serif'],
+        'poppins-semibold': ['poppins-semibold', 'sans-serif'],
+        'poppins-medium': ['poppins-medium', 'sans-serif'],
       },
       colors: {
         orange: {

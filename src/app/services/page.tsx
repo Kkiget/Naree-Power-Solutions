@@ -12,10 +12,8 @@ const Services = () => {
         </div>
         <div className="container mx-auto px-4 pt-16">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Our Services
-            </h1>
-            <p className="text-lg text-gray-300 mb-8">
+            <h2 className="text-4xl font-bold text-center mb-12 text-white">Our Services</h2>
+            <p className="text-lg text-white mb-8">
               Comprehensive power solutions tailored to your specific needs
             </p>
           </div>
@@ -57,8 +55,8 @@ const Services = () => {
                   <div className="text-4xl text-orange-500 mb-4 flex justify-center">
                     <service.icon />
                   </div>
-                  <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-                  <p className="text-gray-600">{service.description}</p>
+                  <h3 className="text-xl font-bold mb-3 text-[#696969]">{service.title}</h3>
+                  <p className="text-[#333333]">{service.description}</p>
                 </div>
               </Link>
             ))}
@@ -73,7 +71,7 @@ const Services = () => {
         </div>
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-6">Need Custom Solutions?</h2>
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-[#333333] mb-8 max-w-2xl mx-auto">
             Contact us to discuss your specific power needs and get a tailored solution.
           </p>
           <Link 

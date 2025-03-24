@@ -14,7 +14,7 @@ export default function ContactUs() {
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Contact Us
             </h1>
-            <p className="text-lg text-gray-300 mb-8">
+            <p className="text-lg text-[#333333] mb-8">
               We're here to help with all your power solution needs
             </p>
           </div>
@@ -47,7 +47,7 @@ export default function ContactUs() {
                   <contact.icon />
                 </div>
                 <h3 className="text-xl font-semibold mb-3">{contact.title}</h3>
-                <p className="text-gray-600">{contact.description}</p>
+                <p className="text-[#333333]">{contact.description}</p>
               </div>
             ))}
           </div>
@@ -62,7 +62,7 @@ export default function ContactUs() {
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-[#333333] mb-1">
                     First Name
                   </label>
                   <input
@@ -71,7 +71,7 @@ export default function ContactUs() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-[#333333] mb-1">
                     Last Name
                   </label>
                   <input
@@ -82,7 +82,7 @@ export default function ContactUs() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-[#333333] mb-1">
                   Email Address
                 </label>
                 <input
@@ -92,7 +92,7 @@ export default function ContactUs() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-[#333333] mb-1">
                     Phone Number
                   </label>
                   <input
@@ -102,7 +102,7 @@ export default function ContactUs() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-[#333333] mb-1">
                     Message
                   </label>
                   <textarea
