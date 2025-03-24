@@ -69,7 +69,7 @@ export default function OurWork() {
               Our Work
             </h1>
             <p className="mt-6 text-xl text-white max-w-3xl mx-auto">
-              Discover our portfolio of successful renewable energy projects across Africa. From solar installations to power backup solutions, we've helped businesses and communities achieve energy independence.
+              Discover our portfolio of successful renewable energy projects across Kenya. From solar installations to power backup solutions, we've helped businesses and communities achieve energy independence.
             </p>
           </div>
         </div>
@@ -99,7 +99,7 @@ export default function OurWork() {
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-taupe-dark sm:text-4xl">Featured Projects</h2>
             <p className="mt-6 text-lg leading-8 text-taupe">
-              Explore our most impactful renewable energy installations across Africa
+              Explore our most impactful renewable energy installations across Kenya
             </p>
           </div>
           <div className="mt-16 space-y-20 lg:space-y-20">

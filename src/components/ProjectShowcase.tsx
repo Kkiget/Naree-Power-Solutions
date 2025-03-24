@@ -99,21 +99,21 @@ const ProjectShowcase = () => {
         <h2 className="text-4xl font-bold text-center mb-12 text-[#696969]">Our <span className="text-gradient">Featured Projects</span></h2>
         
         <div className="relative overflow-hidden">
-          <div className={`card-apple max-w-6xl mx-auto transition-all duration-500 ${isTransitioning ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
-            <div className="grid md:grid-cols-2 gap-0">
-              <div className="img-hover-zoom h-[400px] relative overflow-hidden">
+          <div className={`card-apple max-w-6xl mx-auto transition-all duration-500 rounded-3xl shadow-lg overflow-hidden ${isTransitioning ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`} style={{ minHeight: '500px' }}>
+            <div className="grid md:grid-cols-2 gap-0 h-full">
+              <div className="h-full relative overflow-hidden">
                 <Image
                   src={projects[activeProject].image}
                   alt={projects[activeProject].title}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
+                  className="object-cover h-full"
                   priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
               </div>
               
-              <div className="p-8 md:p-12 flex flex-col justify-center">
+              <div className="p-8 md:p-12 flex flex-col justify-center h-full">
                 <div className="space-y-4">
                   <div>
                     <span className="text-sm font-medium text-orange-500">{projects[activeProject].location}</span>
@@ -123,19 +123,19 @@ const ProjectShowcase = () => {
                   <p className="text-[#333333]">{projects[activeProject].description}</p>
                   
                   <div className="mt-8 grid grid-cols-2 gap-4">
-                    <div className="bg-gray-50 p-4 rounded-xl">
+                    <div className="bg-gray-50 p-4 rounded-2xl shadow-sm">
                       <span className="text-xs text-[#333333]">CAPACITY</span>
                       <p className="text-lg font-medium text-[#696969]">{projects[activeProject].metrics.energySavings}</p>
                     </div>
-                    <div className="bg-gray-50 p-4 rounded-xl">
+                    <div className="bg-gray-50 p-4 rounded-2xl shadow-sm">
                       <span className="text-xs text-[#333333]">ANNUAL OUTPUT</span>
                       <p className="text-lg font-medium text-[#696969]">{projects[activeProject].metrics.costReduction}</p>
                     </div>
-                    <div className="bg-gray-50 p-4 rounded-xl">
+                    <div className="bg-gray-50 p-4 rounded-2xl shadow-sm">
                       <span className="text-xs text-[#333333]">COST SAVINGS</span>
                       <p className="text-lg font-medium text-[#696969]">{projects[activeProject].metrics.carbonReduction}</p>
                     </div>
-                    <div className="bg-gray-50 p-4 rounded-xl">
+                    <div className="bg-gray-50 p-4 rounded-2xl shadow-sm">
                       <span className="text-xs text-[#333333]">CO₂ REDUCTION</span>
                       <p className="text-lg font-medium text-[#696969]">{projects[activeProject].metrics.carbonReduction}</p>
                     </div>

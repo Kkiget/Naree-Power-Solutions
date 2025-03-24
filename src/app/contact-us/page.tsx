@@ -14,7 +14,7 @@ export default function ContactUs() {
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Contact Us
             </h1>
-            <p className="text-lg text-[#333333] mb-8">
+            <p className="text-lg text-white mb-8">
               We're here to help with all your power solution needs
             </p>
           </div>
@@ -46,8 +46,8 @@ export default function ContactUs() {
                 <div className="text-3xl text-orange-500 mb-4 flex justify-center">
                   <contact.icon />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{contact.title}</h3>
-                <p className="text-[#333333]">{contact.description}</p>
+                <h3 className="text-lg font-semibold text-gray-500 mb-2">{contact.title}</h3>
+                <p className="text-gray-500">{contact.description}</p>
               </div>
             ))}
           </div>
@@ -58,7 +58,7 @@ export default function ContactUs() {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-sm p-8">
-            <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
+            <h2 className="text-2xl font-bold text-gray-500 mb-8">Send Us a Message</h2>
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>

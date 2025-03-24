@@ -45,7 +45,7 @@ const Newsletter = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto">
-          <div className="card-apple glass-effect bg-white/10 backdrop-blur-lg p-8 md:p-12 text-white">
+          <div className="card-apple glass-effect bg-white/10 backdrop-blur-lg p-8 md:p-12 text-white rounded-3xl shadow-xl border border-white/10">
             <div className="text-center mb-8">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 Stay <span className="text-orange-400">Updated</span> On Energy Innovation
@@ -65,7 +65,7 @@ const Newsletter = () => {
                     placeholder="Your email address"
                     className="w-full py-4 px-6 pr-14 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 
                     text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-orange-400 
-                    focus:border-transparent transition-all"
+                    focus:border-transparent transition-all shadow-inner"
                   />
                   <button
                     type="submit"

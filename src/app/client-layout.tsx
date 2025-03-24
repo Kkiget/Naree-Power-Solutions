@@ -16,6 +16,7 @@ export default function ClientLayout({
     { name: "Services", href: "/services" },
     { name: "Our Work", href: "/our-work" },
     { name: "News", href: "/news-and-insights" },
+    { name: "Shop", href: "/shop" },
     { name: "Careers", href: "/careers" },
   ];
 
@@ -25,21 +26,21 @@ export default function ClientLayout({
     <html lang="en">
       <body className="font-poppins antialiased">
         <header className="fixed w-full z-50 bg-white/90 backdrop-blur-sm border-b border-gray-200">
-          <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+          <nav className="flex items-center justify-between p-3 lg:px-4" aria-label="Global">
             <div className="flex lg:flex-1">
               <a href="/" className="-m-1.5 p-1.5 flex items-center space-x-3">
                 <Image
                   src="/images/NAREE POWER 3A.svg"
                   alt="Naree Power Logo"
-                  width={60}
-                  height={60}
-                  className="h-12 w-auto"
+                  width={100}
+                  height={100}
+                  className="h-20 w-auto"
                   priority
                 />
                 <span className="text-2xl font-bold text-gray-900 tracking-tight font-['ShareTech'] -mt-1">NAREE POWER</span>
               </a>
             </div>
-            <div className="hidden lg:flex lg:gap-x-12">
+            <div className="hidden lg:flex lg:gap-x-8">
               {navigation.map((item) => (
                 <a 
                   key={item.name} 

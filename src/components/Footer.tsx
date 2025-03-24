@@ -25,11 +25,11 @@ export default function Footer() {
               <Image 
                 src="/images/NAREE POWER 3B.png" 
                 alt="Naree Power Logo" 
-                width={240} 
-                height={80}
-                className="h-20 w-auto"
+                width={400} 
+                height={200}
+                className="h-40 w-auto"
               />
-              <p className="text-gray-400 text-sm -mt-1">Your trusted partner in comprehensive power solutions and renewable energy systems across Africa, delivering reliability and sustainability.</p>
+              <p className="text-gray-400 text-sm -mt-1">Your trusted partner in comprehensive power solutions and renewable energy systems across Kenya, delivering reliability and sustainability.</p>
             </div>
             <div className="flex mt-6 space-x-4">
               {[
@@ -87,11 +87,13 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3">
               {[
+                { name: "Home", link: "/" },
                 { name: "About Us", link: "/about-us" },
+                { name: "Services", link: "/services" },
                 { name: "Our Work", link: "/our-work" },
                 { name: "News & Insights", link: "/news-and-insights" },
-                { name: "Careers", link: "/careers" },
                 { name: "Shop", link: "/shop" },
+                { name: "Careers", link: "/careers" },
                 { name: "Contact Us", link: "/contact-us" }
               ].map((link, index) => (
                 <li 

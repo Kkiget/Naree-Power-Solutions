@@ -29,7 +29,7 @@ export default function Home() {
 
         <div className="relative z-10 container mx-auto px-4 text-center text-white fade-in">
           <h1 className="font-display text-display-2xl md:text-display-xl lg:text-display-2xl font-bold mb-8 tracking-tight">
-            Empowering Africa with <span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-orange-600">Reliable Energy</span>
+            Empowering Kenya with <span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-orange-600">Reliable Energy</span>
           </h1>
           <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto font-light leading-relaxed tracking-wide">
             Sustainable power solutions for homes, businesses, and communities across the continent
@@ -104,7 +104,7 @@ export default function Home() {
                 description: "Adherence to international safety standards"
               }
             ].map((service, index) => (
-              <div key={index} className="card-apple hover:scale-105 p-8 transition-all duration-300">
+              <div key={index} className="card-apple hover:scale-105 p-8 transition-all duration-300 rounded-3xl shadow-lg hover:shadow-xl bg-white border border-gray-100">
                 <div className="text-5xl text-orange-500 mb-4">
                   <service.icon />
                 </div>

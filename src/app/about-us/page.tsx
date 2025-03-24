@@ -15,7 +15,7 @@ export default function AboutUs() {
               About Naree Power Solutions
             </h1>
             <p className="text-lg text-[#696969] mb-8">
-              Leading the way in innovative power solutions across Africa
+              Leading the way in innovative power solutions across Kenya
             </p>
           </div>
         </div>
@@ -28,7 +28,7 @@ export default function AboutUs() {
             <div>
               <h2 className="text-3xl font-bold mb-6 text-[#696969]">Our Story</h2>
               <p className="text-[#696969] mb-4">
-                Founded with a vision to transform Africa's power infrastructure, Naree Power Solutions has been at the forefront of innovative electrical engineering and power solutions.
+                Founded with a vision to transform Kenya's power infrastructure, Naree Power Solutions has been at the forefront of innovative electrical engineering and power solutions.
               </p>
               <p className="text-[#696969] mb-4">
                 With years of experience and a team of dedicated professionals, we've successfully delivered reliable power solutions to businesses, industries, and communities across the continent.

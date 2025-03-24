@@ -15,7 +15,7 @@ export default function Careers() {
               Join Our Team
             </h1>
             <p className="text-lg text-gray-300 mb-8">
-              Be part of a team that's powering Africa's future. We're looking for talented individuals who share our passion for innovation and excellence.
+              Be part of a team that's powering Kenya's future. We're looking for talented individuals who share our passion for innovation and excellence.
             </p>
           </div>
         </div>
@@ -40,7 +40,7 @@ export default function Careers() {
               {
                 icon: FaBriefcase,
                 title: "Impactful Work",
-                description: "Make a real difference in Africa's power infrastructure"
+                description: "Make a real difference in Kenya's power infrastructure"
               }
             ].map((benefit, index) => (
               <div key={index} className="bg-gray-50 p-8 rounded-xl text-center">
@@ -104,7 +104,7 @@ export default function Careers() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-6">Don't See the Right Fit?</h2>
           <p className="text-[#696969] mb-8 max-w-2xl mx-auto">
-            Join our team and be part of Africa's energy transformation
+            Join our team and be part of Kenya's energy transformation
           </p>
           <Link 
             href="/contact-us"

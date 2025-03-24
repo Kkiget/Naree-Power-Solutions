@@ -3,7 +3,7 @@ import Image from 'next/image';
 const newsArticles = [
   {
     id: 1,
-    title: 'Revolutionizing Energy Access in Rural Africa',
+    title: 'Revolutionizing Energy Access in Rural Kenya',
     excerpt: 'How Naree Power Solutions is bringing sustainable energy to remote communities through innovative solar solutions.',
     image: '/images/news/solar-rural.jpg',
     date: 'March 20, 2025',
@@ -12,8 +12,8 @@ const newsArticles = [
   },
   {
     id: 2,
-    title: 'The Future of Green Energy in Africa',
-    excerpt: 'Exploring the latest trends and technologies shaping the renewable energy landscape across the continent.',
+    title: 'The Future of Green Energy in Kenya',
+    excerpt: 'Exploring the latest trends and technologies shaping the renewable energy landscape across the country.',
     image: '/images/news/green-energy.jpg',
     date: 'March 15, 2025',
     readTime: '4 min read',
@@ -50,7 +50,7 @@ export default function NewsAndInsights() {
               News & Insights
             </h1>
             <p className="mt-6 text-xl text-gray-300 max-w-3xl mx-auto">
-              Stay updated with the latest developments in renewable energy, industry insights, and success stories from across Africa.
+              Stay updated with the latest developments in renewable energy, industry insights, and success stories from across Kenya.
             </p>
           </div>
         </div>
@@ -104,7 +104,7 @@ export default function NewsAndInsights() {
               Stay Updated with Industry News
             </h2>
             <p className="mt-4 text-lg leading-6 text-primary-100">
-              Subscribe to our newsletter to receive the latest updates, insights, and news about renewable energy in Africa.
+              Subscribe to our newsletter to receive the latest updates, insights, and news about renewable energy in Kenya.
             </p>
             <form className="mt-8 sm:flex justify-center">
               <label htmlFor="email-address" className="sr-only">

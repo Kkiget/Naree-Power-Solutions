@@ -14,12 +14,12 @@ const NewsInsights = () => {
   const articles = [
     {
       id: 1,
-      title: "The Future of Solar Energy in Africa",
-      excerpt: "How technological advancements and decreasing costs are making solar energy the ideal solution for Africa's energy challenges.",
+      title: "The Future of Solar Energy in Kenya",
+      excerpt: "How technological advancements and decreasing costs are making solar energy the ideal solution for Kenya's energy challenges.",
       date: "March 15, 2025",
       image: "/images/engineer-electric-woman-checking-maintenance-solar-cells.jpg",
       category: "Trends",
-      slug: "future-of-solar-energy-africa"
+      slug: "future-of-solar-energy-kenya"
     },
     {
       id: 2,
@@ -57,7 +57,7 @@ const NewsInsights = () => {
           {articles.map((article, index) => (
             <div 
               key={article.id}
-              className={`group relative overflow-hidden rounded-2xl shadow-xl transition-all duration-300 hover:transform hover:scale-[1.02] ${
+              className={`group relative overflow-hidden rounded-3xl shadow-xl transition-all duration-300 hover:transform hover:scale-[1.02] ${
                 isVisible 
                   ? 'opacity-100 translate-y-0' 
                   : 'opacity-0 translate-y-12'
