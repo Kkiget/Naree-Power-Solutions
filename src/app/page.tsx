@@ -1,34 +1,51 @@
 import Link from "next/link";
+import Image from 'next/image';
 import { FaBolt, FaTools, FaLightbulb, FaShieldAlt } from 'react-icons/fa';
+import Testimonials from "@/components/Testimonials";
+import Newsletter from "@/components/Newsletter";
+import NewsInsights from "@/components/NewsInsights";
+import EnergySavingsCalculator from "@/components/EnergySavingsCalc";
+import ProjectShowcase from "@/components/ProjectShowcase";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-orange-500/20 via-transparent to-transparent" />
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="relative w-full h-full parallax">
+            <Image 
+              src="/images/Hero solar-panels-roof-solar-cell.jpg" 
+              alt="Solar panels with blue sky and sunset" 
+              fill
+              priority
+              sizes="100vw"
+              style={{objectFit: "cover"}}
+              className="transition-transform duration-700 ease-out"
+            />
+          </div>
+          <div className="absolute inset-0 bg-black bg-opacity-40" /> {/* Lighter overlay for better visibility */}
         </div>
 
-        <div className="relative z-10 container mx-auto px-4 text-center text-white">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-            Empowering Africa with <span className="text-orange-500">Reliable</span> Energy
+        <div className="relative z-10 container mx-auto px-4 text-center text-white fade-in">
+          <h1 className="font-display text-display-2xl md:text-display-xl lg:text-display-2xl font-bold mb-8 tracking-tight">
+            Empowering Africa with <span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-orange-600">Reliable Energy</span>
           </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">
-            Your trusted partner in comprehensive power solutions and electrical engineering
+          <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto font-light leading-relaxed tracking-wide">
+            Sustainable power solutions for homes, businesses, and communities across the continent
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
-              href="/contact-us" 
-              className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-semibold transition-all"
-            >
-              Get a Quote
-            </Link>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link 
               href="/services" 
-              className="border-2 border-white hover:bg-white hover:text-black px-8 py-3 rounded-lg font-semibold transition-all"
+              className="btn-apple btn-primary text-lg font-medium"
             >
-              Our Services
+              Explore Our Services
+            </Link>
+            <Link 
+              href="/contact-us" 
+              className="btn-apple btn-secondary text-lg font-medium"
+            >
+              Get in Touch
             </Link>
           </div>
         </div>
@@ -59,7 +76,7 @@ export default function Home() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Our Services</h2>
+            <h2 className="text-4xl font-bold mb-4">Our <span className="text-gradient">Services</span></h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Comprehensive power solutions tailored to your specific needs
             </p>
@@ -87,7 +104,7 @@ export default function Home() {
                 description: "Adherence to international safety standards"
               }
             ].map((service, index) => (
-              <div key={index} className="bg-gray-50 p-8 rounded-xl hover:shadow-lg transition-all">
+              <div key={index} className="card-apple hover:scale-105 p-8 transition-all duration-300">
                 <div className="text-5xl text-orange-500 mb-4">
                   <service.icon />
                 </div>
@@ -99,58 +116,34 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Projects */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Recent Projects</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Delivering excellence in power solutions across Africa
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { title: "Industrial Power System", desc: "Complete factory power solution", color: "from-blue-600 to-blue-800" },
-              { title: "Backup Power Installation", desc: "24/7 power backup system", color: "from-orange-600 to-orange-800" },
-              { title: "Energy Audit & Upgrade", desc: "Power efficiency improvement", color: "from-green-600 to-green-800" }
-            ].map((project, index) => (
-              <div key={index} className="group relative overflow-hidden rounded-xl h-72">
-                <div className={`absolute inset-0 bg-gradient-to-br ${project.color}`} />
-                <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
-                <div className="relative h-full p-6 flex flex-col justify-end text-white">
-                  <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                  <p className="text-sm text-white/80">{project.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="text-center mt-12">
-            <Link 
-              href="/our-work" 
-              className="inline-flex items-center text-orange-500 hover:text-orange-600 font-semibold"
-            >
-              View All Projects
-              <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Featured Projects - Using the enhanced ProjectShowcase component */}
+      <ProjectShowcase />
+
+      {/* Energy Savings Calculator */}
+      <EnergySavingsCalculator />
+
+      {/* Testimonials Section */}
+      <Testimonials />
+
+      {/* News & Insights Section */}
+      <NewsInsights />
+
+      {/* Newsletter Signup */}
+      <Newsletter />
 
       {/* CTA Section */}
-      <section className="relative py-20 overflow-hidden bg-gradient-to-br from-gray-900 to-black">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-orange-500/20 via-transparent to-transparent" />
+      <section className="relative py-24 overflow-hidden bg-gradient-to-br from-gray-900 to-black">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-orange-500/40 via-transparent to-transparent" />
         </div>
         <div className="relative z-10 container mx-auto px-4 text-center text-white">
-          <h2 className="text-4xl font-bold mb-6">Need Power Solutions?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Let us help you achieve reliable and efficient power systems for your business
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Ready to <span className="text-gradient">Transform</span> Your Energy?</h2>
+          <p className="text-xl mb-10 max-w-2xl mx-auto font-light">
+            Let us help you achieve reliable and efficient power systems for your business or home
           </p>
           <Link 
             href="/contact-us" 
-            className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-semibold inline-block transition-all"
+            className="btn-apple btn-primary"
           >
             Contact Us Today
           </Link>

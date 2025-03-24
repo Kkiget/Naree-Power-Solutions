@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import { FaBolt, FaTools, FaLightbulb, FaShieldAlt } from 'react-icons/fa';
-import Footer from '@/components/Footer';
 
 const Services = () => {
   return (
@@ -85,8 +84,6 @@ const Services = () => {
           </Link>
         </div>
       </section>
-
-      <Footer />
     </main>
   );
 };
