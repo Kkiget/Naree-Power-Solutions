@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ShopProvider, useShop } from '@/context/ShopContext';
-import { FaShoppingCart, FaSearch, FaSolarPanel, FaBatteryFull, FaPlug, FaTools, FaArrowRight, FaRegLightbulb, FaFilter } from 'react-icons/fa';
+import { FaShoppingCart, FaSearch, FaSolarPanel, FaBatteryFull, FaPlug, FaTools, FaArrowRight, FaRegLightbulb } from 'react-icons/fa';
 
 // Main Shop Component
 export default function Shop() {
@@ -453,7 +453,7 @@ interface ProductCardProps {
     isHot?: boolean;
     quantity?: number;
   };
-  addToCart: (product: any) => void;
+  addToCart: (product: ProductCardProps['product']) => void;
   formatPrice: (price: number) => string;
 }
 
