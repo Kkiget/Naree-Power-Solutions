@@ -102,7 +102,7 @@ export default function Careers() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-orange-500/20 via-transparent to-transparent" />
         </div>
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-white mb-6">Don't See the Right Fit?</h2>
+          <h2 className="text-3xl font-bold text-white mb-6">Don&apos;t See the Right Fit?</h2>
           <p className="text-gray-600 mb-4">
             We&apos;re looking for skilled professionals to join our team.
           </p>

@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Footer from "@/components/Footer";
 import { Bars3Icon } from "@/components/icons";
 
@@ -20,14 +20,12 @@ export default function ClientLayout({
     { name: "Careers", href: "/careers" },
   ];
 
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   return (
     <>
       <header className="fixed w-full z-50 bg-white/90 backdrop-blur-sm border-b border-gray-200">
         <nav className="flex items-center justify-between p-3 lg:px-4" aria-label="Global">
           <div className="flex lg:flex-1">
-            <a href="/" className="-m-1.5 p-1.5 flex items-center space-x-3">
+            <Link href="/" className="-m-1.5 p-1.5 flex items-center space-x-3">
               <Image
                 src="/images/NAREE POWER 3A.svg"
                 alt="Naree Power Logo"
@@ -37,26 +35,26 @@ export default function ClientLayout({
                 priority
               />
               <span className="text-2xl font-bold text-gray-900 tracking-tight font-['ShareTech'] -mt-1">NAREE POWER</span>
-            </a>
+            </Link>
           </div>
           <div className="hidden lg:flex lg:gap-x-8">
             {navigation.map((item) => (
-              <a 
+              <Link 
                 key={item.name} 
                 href={item.href} 
                 className="text-sm font-semibold leading-6 text-black hover:text-primary-600 transition-colors duration-200"
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a
+            <Link
               href="/contact-us"
               className="rounded-md bg-primary-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
             >
               Contact Us
-            </a>
+            </Link>
           </div>
         </nav>
       </header>

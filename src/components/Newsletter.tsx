@@ -94,7 +94,7 @@ const Newsletter = () => {
                   By subscribing, you agree to our Privacy Policy and consent to receive updates from Naree Power Solutions
                 </p>
                 <p className="text-sm text-gray-500">
-                  Let's stay connected!
+                  Let&apos;s stay connected!
                 </p>
               </form>
             ) : (
@@ -106,7 +106,7 @@ const Newsletter = () => {
                 </div>
                 <h3 className="text-2xl font-bold mb-2">Thank You for Subscribing!</h3>
                 <p className="text-white/80">
-                  You've successfully joined our newsletter. Watch your inbox for the latest updates on renewable energy solutions.
+                  You&apos;ve successfully joined our newsletter. Watch your inbox for the latest updates on renewable energy solutions.
                 </p>
               </div>
             )}

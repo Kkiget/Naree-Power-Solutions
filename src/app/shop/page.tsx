@@ -18,8 +18,6 @@ interface Product {
 
 export default function Shop() {
   const [cart, setCart] = useState<Product[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState('');
 
   const addToCart = (product: Product) => {
     if (!cart.some((item) => item.id === product.id)) {
@@ -855,10 +853,8 @@ export default function Shop() {
 
   const categories = [...new Set(products.map(product => product.category))];
 
-  const filteredProducts = products.filter(product => {
-    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesSearch;
-  });
+  // Return all products since we're not filtering
+  const filteredProducts = products;
 
   const formatPrice = (price: number) => {
     return `₹${price.toLocaleString()}`;
