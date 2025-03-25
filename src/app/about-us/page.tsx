@@ -28,10 +28,10 @@ export default function AboutUs() {
             <div>
               <h2 className="text-3xl font-bold mb-6 text-[#696969]">Our Story</h2>
               <p className="text-lg mb-4">
-                At Naree Power Solutions, we&apos;re committed to revolutionizing India&apos;s energy landscape through sustainable solar solutions.
+                Founded with a vision to transform India&apos;s power infrastructure, Naree Power Solutions has been at the forefront of innovative electrical engineering and power solutions.
               </p>
-              <p className="text-lg mb-8">
-                Our mission is to make clean, renewable energy accessible to everyone while contributing to India&apos;s green energy future.
+              <p className="text-lg mb-4">
+                With years of experience and a team of dedicated professionals, we&apos;ve successfully delivered reliable power solutions to businesses, industries, and communities across the nation.
               </p>
               <p className="text-[#696969]">
                 Our commitment to excellence and sustainable practices has made us a trusted partner in the power sector.
@@ -138,7 +138,7 @@ export default function AboutUs() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-6">Ready to Work Together?</h2>
           <p className="text-[#696969] mb-8 max-w-2xl mx-auto">
-            Let's discuss how we can help power your success with our innovative solutions.
+            Let&apos;s discuss how we can help power your success with our innovative solutions.
           </p>
           <Link 
             href="/contact-us"

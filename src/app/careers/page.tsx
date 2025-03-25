@@ -15,7 +15,7 @@ export default function Careers() {
               Join Our Team
             </h1>
             <p className="text-lg text-gray-600 mb-8">
-              We&apos;re looking for passionate individuals who share our vision of a sustainable future. Join us in our mission to transform India&apos;s energy landscape.
+              We&apos;re looking for talented individuals who share our passion for sustainable energy and innovation. Join us in our mission to transform India&apos;s energy landscape through cutting-edge power solutions.
             </p>
           </div>
         </div>
@@ -104,10 +104,10 @@ export default function Careers() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-6">Don't See the Right Fit?</h2>
           <p className="text-gray-600 mb-4">
-            We&apos;re always looking for talented individuals
+            We&apos;re looking for skilled professionals to join our team.
           </p>
           <p className="text-gray-600">
-            Let&apos;s create a sustainable future together
+            We&apos;re committed to your growth and development.
           </p>
           <Link 
             href="/contact-us"

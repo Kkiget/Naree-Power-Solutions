@@ -93,8 +93,8 @@ const Newsletter = () => {
                 <p className="text-xs text-white/70 text-center mt-4">
                   By subscribing, you agree to our Privacy Policy and consent to receive updates from Naree Power Solutions
                 </p>
-                <p className="text-sm text-gray-500 mt-2">
-                  We&apos;ll never share your email with anyone else.
+                <p className="text-sm text-gray-500">
+                  Let's stay connected!
                 </p>
               </form>
             ) : (

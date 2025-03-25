@@ -1,6 +1,6 @@
 import Link from "next/link";
+import { FaCalendarAlt } from 'react-icons/fa';
 import Image from 'next/image';
-import { FaNewspaper, FaCalendarAlt, FaChartLine } from 'react-icons/fa';
 
 export default function NewsAndHighlights() {
   return (

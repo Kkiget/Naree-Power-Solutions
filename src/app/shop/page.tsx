@@ -19,6 +19,7 @@ interface Product {
 export default function Shop() {
   const [cart, setCart] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const addToCart = (product: Product) => {
     if (!cart.some((item) => item.id === product.id)) {
@@ -854,8 +855,13 @@ export default function Shop() {
 
   const categories = [...new Set(products.map(product => product.category))];
 
+  const filteredProducts = products.filter(product => {
+    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesSearch;
+  });
+
   const formatPrice = (price: number) => {
-    return `KSh ${price.toLocaleString()}`;
+    return `₹${price.toLocaleString()}`;
   };
 
   return (
@@ -904,7 +910,7 @@ export default function Shop() {
               {category}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {products
+              {filteredProducts
                 .filter((product) => product.category === category)
                 .map((product) => (
                   <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
@@ -931,11 +937,11 @@ export default function Shop() {
                       <div className="flex justify-between items-center">
                         <div>
                           <span className="text-xl font-bold text-blue-600">
-                            KSh {product.price.toLocaleString()}
+                            {formatPrice(product.price)}
                           </span>
                           {product.originalPrice && (
                             <span className="text-sm text-gray-500 line-through ml-2">
-                              KSh {product.originalPrice.toLocaleString()}
+                              {formatPrice(product.originalPrice)}
                             </span>
                           )}
                         </div>
@@ -960,15 +966,12 @@ export default function Shop() {
       </div>
 
       {/* Energy Solutions Banner */}
-      <section className="py-16 bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white">
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-8">Custom Energy Solutions</h2>
-          <p className="max-w-2xl mx-auto text-gray-300 mb-8">
-            Need a customized power solution for your specific needs? Our experts can help design and implement the perfect system for your home or business in Kenya.
-          </p>
+          <h2 className="text-3xl font-bold text-gray-800 mb-8">Need Something Special?</h2>
           <Link 
-            href="/contact-us" 
-            className="inline-block bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-3 rounded-full hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg hover:shadow-xl"
+            href="/contact-us"
+            className="inline-block bg-orange-500 text-white px-8 py-3 rounded-lg hover:bg-orange-600 transition-colors"
           >
             Contact Us For Custom Solutions
           </Link>

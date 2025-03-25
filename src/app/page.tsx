@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from 'next/image';
-import { FaBolt, FaTools, FaLightbulb, FaShieldAlt, FaPlug, FaBatteryFull, FaSolarPanel, FaWater, FaTint, FaCog, FaChartLine, FaClipboardList, FaTachometerAlt, FaCogs, FaChartArea, FaMapMarkedAlt } from 'react-icons/fa';
+import { FaSolarPanel, FaBatteryFull, FaTools, FaLightbulb, FaCogs, FaMapMarkedAlt } from 'react-icons/fa';
+
 import Testimonials from "@/components/Testimonials";
 import Newsletter from "@/components/Newsletter";
 import NewsInsights from "@/components/NewsInsights";

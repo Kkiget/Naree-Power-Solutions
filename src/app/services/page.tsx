@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from 'next/image';
 import { FaSolarPanel, FaBatteryFull, FaTools, FaLightbulb, FaCogs, FaMapMarkedAlt } from 'react-icons/fa';
 
 const ServiceCard = ({ title, description, icon: Icon }: { title: string; description: string; icon: React.ComponentType<{ className?: string }> }) => {

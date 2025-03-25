@@ -81,7 +81,7 @@ export default function NewsletterSignup() {
           ) : isClient && isSubmitted ? (
             <div className="bg-green-600 bg-opacity-30 border border-green-500 p-4 rounded-lg">
               <p className="text-white">
-                Thank you for subscribing! We&apos;ve sent a confirmation to your email.
+                Thank you for subscribing! We've sent a confirmation to your email.
               </p>
             </div>
           ) : (
@@ -90,8 +90,16 @@ export default function NewsletterSignup() {
             </div>
           )}
           
+          <div className="relative h-48 w-full mb-4">
+            <Image
+              src="/images/solar-power-power-station.jpg"
+              alt="Newsletter background"
+              fill
+              className="object-cover rounded-lg"
+            />
+          </div>
           <p className="text-sm text-gray-500">
-            Let&apos;s stay connected!
+            Let's stay connected!
           </p>
         </div>
       </div>

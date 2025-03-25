@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { FaCreditCard, FaShieldAlt, FaClock } from 'react-icons/fa';
 
 export default function Checkout() {

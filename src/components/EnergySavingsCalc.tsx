@@ -24,7 +24,7 @@ const EnergySavingsCalculator = () => {
   // Calculate savings whenever inputs change
   useEffect(() => {
     calculateSavings();
-  }, [calculateSavings, monthlyBill, sunlightHours, systemSize]);
+  }, [calculateSavings]);
   
   const handleTouch = () => {
     if (!touched) setTouched(true);

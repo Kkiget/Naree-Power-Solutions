@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 
 interface Testimonial {
@@ -43,21 +43,18 @@ const Testimonials = () => {
     }
   ];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      handleNext();
-    }, 8000);
-    
-    return () => clearInterval(interval);
-  }, [activeIndex]);
-
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     if (!isTransitioning) {
       setIsTransitioning(true);
-      setActiveIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+      setActiveIndex((prev) => (prev + 1) % testimonials.length);
       setTimeout(() => setIsTransitioning(false), 500);
     }
-  };
+  }, [isTransitioning, testimonials.length]);
+
+  useEffect(() => {
+    const interval = setInterval(handleNext, 8000);
+    return () => clearInterval(interval);
+  }, [handleNext]);
 
   const handlePrevious = () => {
     if (!isTransitioning) {
@@ -106,7 +103,7 @@ const Testimonials = () => {
           >
             <blockquote className="text-center">
               <p className="font-display text-2xl md:text-3xl text-white mb-8 leading-relaxed">
-                &ldquo;{testimonials[activeIndex].quote}&rdquo;
+                &quot;{testimonials[activeIndex].quote}&quot;
               </p>
               <footer className="mt-8">
                 <div className="font-display text-xl text-orange-400 mb-2">
