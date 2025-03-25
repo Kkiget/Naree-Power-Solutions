@@ -857,7 +857,7 @@ export default function Shop() {
   const filteredProducts = products;
 
   const formatPrice = (price: number) => {
-    return `₹${price.toLocaleString()}`;
+    return `KSh ${price.toLocaleString()}`;
   };
 
   return (
