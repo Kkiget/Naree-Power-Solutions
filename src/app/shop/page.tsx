@@ -40,7 +40,7 @@ function ShopContent() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="relative h-[300px] bg-gradient-to-r from-blue-900 to-blue-700">
+      <div className="relative h-[300px] bg-gradient-to-r from-black to-gray-800">
         <div className="absolute inset-0">
           <Image 
             src="/solar-panels-roof-solar-cell.jpg"
@@ -68,7 +68,7 @@ function ShopContent() {
             <div className="flex items-center space-x-2">
               <FaFilter className="text-gray-500" />
               <select 
-                className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 value={selectedCategory || ''}
                 onChange={(e) => setSelectedCategory(e.target.value === '' ? null : e.target.value)}
               >
@@ -87,7 +87,7 @@ function ShopContent() {
               <input
                 type="text"
                 placeholder="Search products..."
-                className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -95,7 +95,7 @@ function ShopContent() {
             
             {/* Cart Button */}
             <button 
-              className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+              className="flex items-center space-x-2 bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition-colors"
               onClick={() => setShowCart(!showCart)}
             >
               <FaShoppingCart />
@@ -136,14 +136,14 @@ function ShopContent() {
                         <div className="flex items-center space-x-2">
                           <button 
                             onClick={() => updateQuantity(item.id, (item.quantity || 1) - 1)}
-                            className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300"
+                            className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-orange-100"
                           >
                             -
                           </button>
                           <span className="mx-2">{item.quantity}</span>
                           <button 
                             onClick={() => updateQuantity(item.id, (item.quantity || 1) + 1)}
-                            className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300"
+                            className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-orange-100"
                           >
                             +
                           </button>
@@ -168,7 +168,7 @@ function ShopContent() {
                   
                   <div className="flex space-x-4">
                     <button 
-                      className="flex-1 bg-green-600 text-white py-2 rounded hover:bg-green-700 transition-colors"
+                      className="flex-1 bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition-colors"
                       onClick={() => alert('Checkout functionality coming soon!')}
                     >
                       Checkout
@@ -253,12 +253,12 @@ function ProductCard({ product, addToCart, formatPrice }: ProductCardProps) {
           className="object-cover"
         />
         {product.discount && (
-          <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
+          <div className="absolute top-2 left-2 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded">
             {product.discount}% OFF
           </div>
         )}
         {product.isHot && (
-          <div className="absolute top-2 right-2 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded">
+          <div className="absolute top-2 right-2 bg-black text-white text-xs font-bold px-2 py-1 rounded">
             HOT
           </div>
         )}
@@ -267,7 +267,7 @@ function ProductCard({ product, addToCart, formatPrice }: ProductCardProps) {
         <h3 className="font-semibold text-lg mb-1">{product.name}</h3>
         <p className="text-gray-600 text-sm mb-2">{product.description}</p>
         <div className="flex items-baseline mb-2">
-          <span className="text-xl font-bold text-blue-600">{formatPrice(product.price)}</span>
+          <span className="text-xl font-bold text-orange-600">{formatPrice(product.price)}</span>
           {product.originalPrice && (
             <span className="ml-2 text-sm text-gray-500 line-through">
               {formatPrice(product.originalPrice)}
@@ -276,7 +276,7 @@ function ProductCard({ product, addToCart, formatPrice }: ProductCardProps) {
         </div>
         <button
           onClick={() => addToCart(product)}
-          className="mt-4 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors duration-300"
+          className="mt-4 w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition-colors duration-300"
         >
           Add to Cart
         </button>
