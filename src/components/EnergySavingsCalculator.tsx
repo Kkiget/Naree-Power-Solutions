@@ -25,11 +25,6 @@ export default function EnergySavingsCalculator() {
     };
   };
 
-  // Added annual savings calculation from EnergySavingsCalc
-  const calculateAnnualSavings = (kwhUsage: number) => {
-    return kwhUsage * 0.25;
-  }
-
   const results = calculateSavings();
 
   const handleCalculate = () => {
