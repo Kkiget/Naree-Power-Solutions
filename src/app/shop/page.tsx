@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { FaSolarPanel, FaBatteryFull, FaLightbulb, FaWater, FaPlug } from 'react-icons/fa';
 
 interface Product {
   id: string;

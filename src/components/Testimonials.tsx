@@ -106,7 +106,7 @@ const Testimonials = () => {
           >
             <blockquote className="text-center">
               <p className="font-display text-2xl md:text-3xl text-white mb-8 leading-relaxed">
-                "{testimonials[activeIndex].quote}"
+                &ldquo;{testimonials[activeIndex].quote}&rdquo;
               </p>
               <footer className="mt-8">
                 <div className="font-display text-xl text-orange-400 mb-2">

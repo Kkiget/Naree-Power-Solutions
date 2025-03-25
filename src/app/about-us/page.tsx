@@ -27,11 +27,11 @@ export default function AboutUs() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold mb-6 text-[#696969]">Our Story</h2>
-              <p className="text-[#696969] mb-4">
-                Founded with a vision to transform Kenya's power infrastructure, Naree Power Solutions has been at the forefront of innovative electrical engineering and power solutions.
+              <p className="text-lg mb-4">
+                At Naree Power Solutions, we&apos;re committed to revolutionizing India&apos;s energy landscape through sustainable solar solutions.
               </p>
-              <p className="text-[#696969] mb-4">
-                With years of experience and a team of dedicated professionals, we've successfully delivered reliable power solutions to businesses, industries, and communities across the continent.
+              <p className="text-lg mb-8">
+                Our mission is to make clean, renewable energy accessible to everyone while contributing to India&apos;s green energy future.
               </p>
               <p className="text-[#696969]">
                 Our commitment to excellence and sustainable practices has made us a trusted partner in the power sector.
@@ -121,7 +121,9 @@ export default function AboutUs() {
                 <div className="w-24 h-24 bg-gradient-to-br from-gray-700 to-gray-900 rounded-full mx-auto mb-4" />
                 <h3 className="text-xl font-semibold mb-2 text-[#696969]">{member.name}</h3>
                 <p className="text-orange-500 mb-3">{member.position}</p>
-                <p className="text-[#696969]">{member.desc}</p>
+                <p className="text-gray-600">
+                  We&apos;re proud to be at the forefront of India&apos;s solar revolution
+                </p>
               </div>
             ))}
           </div>

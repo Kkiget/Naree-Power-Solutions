@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const EnergySavingsCalculator = () => {
   const [monthlyBill, setMonthlyBill] = useState(200);
@@ -9,12 +9,7 @@ const EnergySavingsCalculator = () => {
   const [savings, setSavings] = useState({ monthly: 0, annual: 0, twentyYear: 0 });
   const [touched, setTouched] = useState(false);
   
-  // Calculate savings whenever inputs change
-  useEffect(() => {
-    calculateSavings();
-  }, [monthlyBill, sunlightHours, systemSize]);
-  
-  const calculateSavings = () => {
+  const calculateSavings = useCallback(() => {
     // Basic formula: Monthly bill reduction based on system size and sunlight hours
     const monthlyReduction = monthlyBill * (systemSize * sunlightHours) / 100;
     const monthlySavings = Math.min(monthlyReduction, monthlyBill * 0.9); // Cap at 90% of bill
@@ -24,7 +19,12 @@ const EnergySavingsCalculator = () => {
       annual: parseFloat((monthlySavings * 12).toFixed(2)),
       twentyYear: parseFloat((monthlySavings * 12 * 20).toFixed(2))
     });
-  };
+  }, [monthlyBill, sunlightHours, systemSize]);
+  
+  // Calculate savings whenever inputs change
+  useEffect(() => {
+    calculateSavings();
+  }, [calculateSavings, monthlyBill, sunlightHours, systemSize]);
   
   const handleTouch = () => {
     if (!touched) setTouched(true);

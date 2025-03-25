@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { FaPaperPlane } from 'react-icons/fa';
+import Image from 'next/image';
 
 export default function NewsletterSignup() {
   const [email, setEmail] = useState('');
@@ -32,10 +33,11 @@ export default function NewsletterSignup() {
   return (
     <section className="py-16 relative">
       <div className="absolute inset-0 z-0">
-        <img 
+        <Image 
           src="/images/beautiful-alternative-energy-plant-with-solar-panels.jpg" 
           alt="Solar panel farm" 
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-black bg-opacity-60" />
       </div>
@@ -79,7 +81,7 @@ export default function NewsletterSignup() {
           ) : isClient && isSubmitted ? (
             <div className="bg-green-600 bg-opacity-30 border border-green-500 p-4 rounded-lg">
               <p className="text-white">
-                Thank you for subscribing! We've sent a confirmation to your email.
+                Thank you for subscribing! We&apos;ve sent a confirmation to your email.
               </p>
             </div>
           ) : (
@@ -88,8 +90,8 @@ export default function NewsletterSignup() {
             </div>
           )}
           
-          <p className="text-sm text-gray-300 mt-4">
-            We respect your privacy and will never share your information.
+          <p className="text-sm text-gray-500">
+            Let&apos;s stay connected!
           </p>
         </div>
       </div>

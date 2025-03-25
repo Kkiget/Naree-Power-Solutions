@@ -14,8 +14,8 @@ export default function Careers() {
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Join Our Team
             </h1>
-            <p className="text-lg text-gray-300 mb-8">
-              Be part of a team that's powering Kenya's future. We're looking for talented individuals who share our passion for innovation and excellence.
+            <p className="text-lg text-gray-600 mb-8">
+              We&apos;re looking for passionate individuals who share our vision of a sustainable future. Join us in our mission to transform India&apos;s energy landscape.
             </p>
           </div>
         </div>
@@ -103,8 +103,11 @@ export default function Careers() {
         </div>
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-6">Don't See the Right Fit?</h2>
-          <p className="text-[#696969] mb-8 max-w-2xl mx-auto">
-            Join our team and be part of Kenya's energy transformation
+          <p className="text-gray-600 mb-4">
+            We&apos;re always looking for talented individuals
+          </p>
+          <p className="text-gray-600">
+            Let&apos;s create a sustainable future together
           </p>
           <Link 
             href="/contact-us"

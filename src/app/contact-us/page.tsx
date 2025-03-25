@@ -15,7 +15,7 @@ export default function ContactUs() {
               Contact Us
             </h1>
             <p className="text-lg text-white mb-8">
-              We're here to help with all your power solution needs
+              We&apos;re here to help with all your power solution needs
             </p>
           </div>
         </div>

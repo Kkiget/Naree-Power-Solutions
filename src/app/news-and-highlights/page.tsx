@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from 'next/image';
 import { FaNewspaper, FaCalendarAlt, FaChartLine } from 'react-icons/fa';
 
 export default function NewsAndHighlights() {
@@ -50,8 +51,13 @@ export default function NewsAndHighlights() {
             ].map((news, index) => (
               <Link key={index} href={news.link}>
                 <div className="bg-gray-50 rounded-xl overflow-hidden hover:shadow-lg transition-all">
-                  <div className="aspect-w-16 aspect-h-9 bg-gradient-to-br from-gray-200 to-gray-300">
-                    <img src={news.image} alt={news.title} className="object-cover" />
+                  <div className="relative h-48 w-full mb-4">
+                    <Image
+                      src={news.image}
+                      alt={news.title}
+                      fill
+                      className="object-cover rounded-lg"
+                    />
                   </div>
                   <div className="p-6">
                     <div className="flex items-center text-sm text-gray-500 mb-2">

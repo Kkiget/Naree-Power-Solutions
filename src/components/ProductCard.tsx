@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 interface ProductCardProps {
   image: string;
@@ -31,12 +32,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
           -{discountPercentage}%
         </div>
       )}
-      <img
-        src={image}
-        alt={name}
-        className="w-full h-48 object-cover"
-        loading="lazy"
-      />
+      <div className="relative h-48 w-full">
+        <Image
+          src={image}
+          alt={name}
+          fill
+          className="object-cover rounded-t-lg"
+        />
+      </div>
       <div className="p-4">
         <p className="text-gray-500 text-xs uppercase tracking-wider">{category}</p>
         <h3 className="text-lg font-bold mt-2">{name}</h3>
