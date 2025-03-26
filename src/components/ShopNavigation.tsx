@@ -2,121 +2,112 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch, FaShoppingCart } from 'react-icons/fa';
+import { useState } from 'react';
 
 export default function ShopNavigation() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    <>
-      {/* Support Bar */}
-      <div className="bg-orange-600 text-white py-1 px-4">
-        <div className="container mx-auto flex justify-between items-center text-sm">
-          <span>
-            Need Quick Support?{' '}
-            <a href="mailto:sales@solarshop.co.ke" className="font-bold hover:underline">
-              Send Us an Email
-            </a>
-          </span>
-          <span>
-            Call Us Now: (+254) 722863668 | (+254) 722699112
-          </span>
-        </div>
-      </div>
-
-      {/* Main Navigation */}
-      <div className="bg-orange-500">
+    <nav className="bg-orange-700 text-white p-4">
+      {/* Top Navigation Links */}
+      <div className="bg-orange-800 text-sm text-center p-2">
         <div className="container mx-auto">
-          {/* Top Navigation */}
-          <div className="flex justify-between items-center px-4 py-2">
-            {/* Left Section - Logo */}
-            <div className="flex items-center">
-              <Image 
-                src="/images/NAREE POWER 3B.png" 
-                alt="Naree Power Logo" 
-                width={400} 
-                height={200}
-                className="h-12 w-auto"
-              />
-            </div>
+          <div className="flex justify-center gap-4">
+            <Link href="/" className="hover:underline">HOME</Link>
+            <Link href="/about" className="hover:underline">ABOUT US</Link>
+            <Link href="/services" className="hover:underline">SERVICES</Link>
+            <Link href="/news" className="hover:underline">NEWS</Link>
+            <Link href="/shop" className="hover:underline">SHOP</Link>
+            <Link href="/careers" className="hover:underline">CAREERS</Link>
+          </div>
+        </div>
+      </div>
 
-            {/* Center Section - Main Navigation */}
-            <div className="hidden md:flex items-center gap-4">
-              <Link href="/" className="text-white font-bold hover:text-white/80 transition-colors">
-                HOME
-              </Link>
-              <Link href="/about" className="text-white font-bold hover:text-white/80 transition-colors">
-                ABOUT
-              </Link>
-              <Link href="/services" className="text-white font-bold hover:text-white/80 transition-colors">
-                SERVICES
-              </Link>
-              <Link href="/blog" className="text-white font-bold hover:text-white/80 transition-colors">
-                BLOG
-              </Link>
-              <Link href="/contact" className="text-white font-bold hover:text-white/80 transition-colors">
-                CONTACT
-              </Link>
-            </div>
+      <div className="container mx-auto flex justify-between items-center mt-2">
+        {/* Logo and Contact Info */}
+        <div className="flex items-center gap-4">
+          <Image 
+            src="/images/NAREE POWER 3B.png" 
+            alt="Naree Power Logo" 
+            width={400} 
+            height={200}
+            className="h-12 w-auto"
+          />
+          <div>
+            <p>Email: sales@nareepower.co.ke</p>
+            <p>Call: (+254)722863668 | (+254)722699112</p>
+          </div>
+        </div>
 
-            {/* Right Section - Search and Cart */}
-            <div className="flex items-center gap-4">
-              {/* Search Bar */}
-              <div className="flex items-center bg-white rounded-lg p-1">
-                <input
-                  type="text"
-                  placeholder="I'm shopping for..."
-                  className="border-none px-2 py-1 outline-none"
-                />
-                <button className="text-orange-500">
-                  <FaSearch />
-                </button>
-              </div>
+        {/* Search Bar */}
+        <div className="flex items-center bg-white rounded-lg overflow-hidden w-96">
+          <input
+            type="text"
+            placeholder="I'm shopping for..."
+            className="p-2 text-black flex-1 focus:outline-none"
+          />
+          <button className="bg-black p-2">
+            <FaSearch />
+          </button>
+        </div>
 
-              {/* Cart Section */}
-              <div className="flex items-center gap-4">
-                <Link href="/login" className="text-white hover:text-white/80 transition-colors">
-                  Login | My Account
-                </Link>
-                <Link href="/wishlist" className="text-white hover:text-white/80 transition-colors">
-                  Favorite | My Wishlist
-                </Link>
-                <Link href="/cart" className="text-white hover:text-white/80 transition-colors">
-                  🛒 Your Cart
-                </Link>
-              </div>
+        {/* User Actions */}
+        <div className="flex items-center gap-6">
+          <Link href="/login" className="hover:underline">My Account</Link>
+          <Link href="/wishlist" className="hover:underline">My Wishlist</Link>
+          <div className="relative">
+            <FaShoppingCart />
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2">0</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation Links with Dropdowns */}
+      <div className="bg-orange-800 p-2 mt-2 flex justify-between items-center text-sm">
+        <button 
+          className="flex items-center gap-2"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          <span>Shop by Department</span>
+        </button>
+        {isMenuOpen && (
+          <div className="absolute bg-orange-800 shadow-lg p-4 rounded mt-2">
+            <Link href="/solar-panels" className="block py-1 hover:underline">Solar Panels</Link>
+            <Link href="/solar-inverters" className="block py-1 hover:underline">Solar Inverters</Link>
+            <Link href="/solar-batteries" className="block py-1 hover:underline">Solar Batteries</Link>
+            <Link href="/solar-water-heaters" className="block py-1 hover:underline">Solar Water Heaters</Link>
+            <Link href="/solar-outdoor-lights" className="block py-1 hover:underline">Solar Outdoor Lights</Link>
+            <Link href="/solar-water-pumps" className="block py-1 hover:underline">Solar Water Pumps</Link>
+          </div>
+        )}
+        
+        <div className="flex gap-6">
+          <div className="relative group">
+            <Link href="/solar-panels" className="hover:underline">Solar Panels</Link>
+            <div className="absolute hidden group-hover:block bg-orange-800 shadow-lg p-2 rounded mt-2">
+              <Link href="/solar-panels/residential" className="block py-1 hover:underline">Residential</Link>
+              <Link href="/solar-panels/commercial" className="block py-1 hover:underline">Commercial</Link>
             </div>
           </div>
-
-          {/* Shop Navigation */}
-          <div className="flex justify-between items-center px-4 py-2">
-            {/* Left Section - Shop Menu */}
-            <div className="flex items-center">
-              <div className="hidden md:flex items-center gap-4">
-                <Link href="/shop" className="text-white font-bold hover:text-white/80 transition-colors">
-                  SHOP BY DEPARTMENT
-                </Link>
-                <Link href="/solar-panels" className="text-white font-bold hover:text-white/80 transition-colors">
-                  SOLAR PANELS
-                </Link>
-                <Link href="/solar-inverters" className="text-white font-bold hover:text-white/80 transition-colors">
-                  SOLAR INVERTERS
-                </Link>
-                <Link href="/solar-batteries" className="text-white font-bold hover:text-white/80 transition-colors">
-                  SOLAR BATTERIES
-                </Link>
-                <Link href="/solar-water-heaters" className="text-white font-bold hover:text-white/80 transition-colors">
-                  SOLAR WATER HEATERS
-                </Link>
-                <Link href="/solar-outdoor-lights" className="text-white font-bold hover:text-white/80 transition-colors">
-                  SOLAR OUTDOOR LIGHTS
-                </Link>
-                <Link href="/solar-water-pumps" className="text-white font-bold hover:text-white/80 transition-colors">
-                  SOLAR WATER PUMPS
-                </Link>
-              </div>
+          
+          <div className="relative group">
+            <Link href="/solar-inverters" className="hover:underline">Solar Inverters</Link>
+            <div className="absolute hidden group-hover:block bg-orange-800 shadow-lg p-2 rounded mt-2">
+              <Link href="/solar-inverters/hybrid" className="block py-1 hover:underline">Hybrid</Link>
+              <Link href="/solar-inverters/off-grid" className="block py-1 hover:underline">Off-grid</Link>
+            </div>
+          </div>
+          
+          <div className="relative group">
+            <Link href="/solar-batteries" className="hover:underline">Solar Batteries</Link>
+            <div className="absolute hidden group-hover:block bg-orange-800 shadow-lg p-2 rounded mt-2">
+              <Link href="/solar-batteries/lithium" className="block py-1 hover:underline">Lithium</Link>
+              <Link href="/solar-batteries/lead-acid" className="block py-1 hover:underline">Lead Acid</Link>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </nav>
   );
 }
