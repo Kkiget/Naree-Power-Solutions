@@ -5,11 +5,18 @@ import Image from 'next/image';
 import { ShopProvider, useShop, Product } from '@/context/ShopContext';
 import { FaShoppingCart, FaFilter, FaSearch } from 'react-icons/fa';
 
-// Main Shop Component
 export default function Shop() {
+  const [isShopPage, setIsShopPage] = useState(false);
+
+  useEffect(() => {
+    const pathname = document.querySelector('[data-pathname]')?.getAttribute('data-pathname');
+    setIsShopPage(pathname === '/shop');
+  }, []);
+
   return (
     <ShopProvider>
       <div className="min-h-screen bg-gray-50">
+        {isShopPage && <ShopNavigation />}
         <ShopContent />
       </div>
     </ShopProvider>

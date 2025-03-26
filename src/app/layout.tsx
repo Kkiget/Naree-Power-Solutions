@@ -4,7 +4,7 @@ import "./fonts.css";
 import { ReactNode } from "react";
 import ClientLayout from "@/components/ClientLayout";
 import ShopNavigation from "@/components/ShopNavigation";
-import { usePathname } from "next/navigation";
+import PathnameProvider from "./components/PathnameProvider";
 
 export const metadata: Metadata = {
   title: "Naree Power Solutions",
@@ -41,21 +41,12 @@ export default function RootLayout({
 }: {
   children: ReactNode
 }) {
-  const pathname = usePathname();
-  
   return (
     <html lang="en">
       <body className="font-poppins antialiased">
-        {pathname === '/shop' ? (
-          <>
-            <ShopNavigation />
-            {children}
-          </>
-        ) : (
-          <ClientLayout>
-            {children}
-          </ClientLayout>
-        )}
+        <PathnameProvider>
+          {children}
+        </PathnameProvider>
       </body>
     </html>
   );
