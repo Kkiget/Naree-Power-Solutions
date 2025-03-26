@@ -5,6 +5,8 @@ import "./fonts.css";
 import { ReactNode } from "react";
 import { ShopProvider } from '@/context/ShopContext';
 import ClientLayout from '@/components/ClientLayout';
+import ShopNavigation from '@/components/ShopNavigation';
+import { usePathname } from 'next/navigation';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -43,13 +45,22 @@ export default function RootLayout({
 }: {
   children: ReactNode
 }) {
+  const pathname = usePathname();
+  
   return (
     <html lang="en">
       <body className={inter.className}>
         <ShopProvider>
-          <ClientLayout>
-            {children}
-          </ClientLayout>
+          {pathname === '/shop' ? (
+            <>
+              <ShopNavigation />
+              {children}
+            </>
+          ) : (
+            <ClientLayout>
+              {children}
+            </ClientLayout>
+          )}
         </ShopProvider>
       </body>
     </html>

@@ -15,9 +15,9 @@ export default function ShopNavigation() {
         <div className="container mx-auto">
           <div className="flex justify-center gap-4">
             <Link href="/" className="hover:underline">HOME</Link>
-            <Link href="/about" className="hover:underline">ABOUT US</Link>
+            <Link href="/about-us" className="hover:underline">ABOUT US</Link>
             <Link href="/services" className="hover:underline">SERVICES</Link>
-            <Link href="/news" className="hover:underline">NEWS</Link>
+            <Link href="/news-and-insights" className="hover:underline">NEWS</Link>
             <Link href="/shop" className="hover:underline">SHOP</Link>
             <Link href="/careers" className="hover:underline">CAREERS</Link>
           </div>

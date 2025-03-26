@@ -4,15 +4,12 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { ShopProvider, useShop, Product } from '@/context/ShopContext';
 import { FaShoppingCart, FaFilter, FaSearch } from 'react-icons/fa';
-import ShopNavigation from '@/components/ShopNavigation';
 
 // Main Shop Component
 export default function Shop() {
   return (
     <ShopProvider>
       <div className="min-h-screen bg-gray-50">
-        <ShopNavigation />
-        
         <ShopContent />
       </div>
     </ShopProvider>
@@ -164,7 +161,6 @@ function ShopContent() {
         </div>
       )}
 
-      {/* Product Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredProducts.map(product => (
           <ProductCard key={product.id} product={product} addToCart={addToCart} formatPrice={formatPrice} />
