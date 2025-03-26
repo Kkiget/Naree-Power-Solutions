@@ -1,18 +1,95 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { ShopProvider, useShop, Product } from '@/context/ShopContext';
 import { FaShoppingCart, FaFilter, FaSearch } from 'react-icons/fa';
 
 // Main Shop Component
 export default function Shop() {
+  const [isShopPage, setIsShopPage] = useState(false);
+
+  useEffect(() => {
+    const pathname = document.querySelector('[data-pathname]')?.getAttribute('data-pathname');
+    setIsShopPage(pathname === '/shop');
+  }, []);
+
   return (
     <ShopProvider>
       <div className="min-h-screen bg-gray-50">
+        {isShopPage && <ShopNavigation />}
         <ShopContent />
       </div>
     </ShopProvider>
+  );
+}
+
+// Shop Navigation Component
+function ShopNavigation() {
+  const { 
+    filteredProducts, 
+    cart, 
+    addToCart, 
+    selectedCategory, 
+    setSelectedCategory, 
+    searchQuery, 
+    setSearchQuery, 
+    categories,
+    cartTotal,
+    removeFromCart,
+    updateQuantity
+  } = useShop();
+  
+  const [showCart, setShowCart] = useState(false);
+
+  const formatPrice = (price: number) => {
+    return `KSh ${price.toLocaleString()}`;
+  };
+
+  return (
+    <div className="bg-white shadow-md">
+      <div className="container mx-auto px-4 py-4">
+        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          {/* Category Filter */}
+          <div className="flex items-center space-x-2">
+            <FaFilter className="text-gray-500" />
+            <select 
+              className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              value={selectedCategory || ''}
+              onChange={(e) => setSelectedCategory(e.target.value === '' ? null : e.target.value)}
+            >
+              <option value="">All Categories</option>
+              {categories.map(category => (
+                <option key={category} value={category}>{category}</option>
+              ))}
+            </select>
+          </div>
+          
+          {/* Search */}
+          <div className="relative flex-1 max-w-md mx-4">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <FaSearch className="text-gray-400" />
+            </div>
+            <input
+              type="text"
+              placeholder="Search products..."
+              className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+          
+          {/* Cart Button */}
+          <button 
+            className="flex items-center space-x-2 bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition-colors"
+            onClick={() => setShowCart(!showCart)}
+          >
+            <FaShoppingCart />
+            <span>Cart ({cart.reduce((total, item) => total + (item.quantity || 1), 0)})</span>
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -40,51 +117,6 @@ function ShopContent() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      {/* Shop Controls */}
-      <div className="bg-white shadow-md">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            {/* Category Filter */}
-            <div className="flex items-center space-x-2">
-              <FaFilter className="text-gray-500" />
-              <select 
-                className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                value={selectedCategory || ''}
-                onChange={(e) => setSelectedCategory(e.target.value === '' ? null : e.target.value)}
-              >
-                <option value="">All Categories</option>
-                {categories.map(category => (
-                  <option key={category} value={category}>{category}</option>
-                ))}
-              </select>
-            </div>
-            
-            {/* Search */}
-            <div className="relative flex-1 max-w-md mx-4">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <FaSearch className="text-gray-400" />
-              </div>
-              <input
-                type="text"
-                placeholder="Search products..."
-                className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </div>
-            
-            {/* Cart Button */}
-            <button 
-              className="flex items-center space-x-2 bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition-colors"
-              onClick={() => setShowCart(!showCart)}
-            >
-              <FaShoppingCart />
-              <span>Cart ({cart.reduce((total, item) => total + (item.quantity || 1), 0)})</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
       {/* Cart Dropdown */}
       {showCart && (
         <div className="container mx-auto px-4 mt-4">
@@ -160,7 +192,7 @@ function ShopContent() {
           </div>
         </div>
       )}
-
+      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredProducts.map(product => (
           <ProductCard key={product.id} product={product} addToCart={addToCart} formatPrice={formatPrice} />
