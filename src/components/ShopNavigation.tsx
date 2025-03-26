@@ -38,22 +38,28 @@ export default function ShopNavigation() {
               />
             </div>
 
-            {/* Center Section - Main Navigation */}
+            {/* Center Section - Shop Navigation */}
             <div className="hidden md:flex items-center gap-4">
-              <Link href="/" className="text-white font-bold hover:text-white/80 transition-colors">
-                HOME
+              <Link href="/shop" className="text-white font-bold hover:text-white/80 transition-colors">
+                SHOP BY DEPARTMENT
               </Link>
-              <Link href="/about" className="text-white font-bold hover:text-white/80 transition-colors">
-                ABOUT
+              <Link href="/solar-panels" className="text-white font-bold hover:text-white/80 transition-colors">
+                SOLAR PANELS
               </Link>
-              <Link href="/services" className="text-white font-bold hover:text-white/80 transition-colors">
-                SERVICES
+              <Link href="/solar-inverters" className="text-white font-bold hover:text-white/80 transition-colors">
+                SOLAR INVERTERS
               </Link>
-              <Link href="/blog" className="text-white font-bold hover:text-white/80 transition-colors">
-                BLOG
+              <Link href="/solar-batteries" className="text-white font-bold hover:text-white/80 transition-colors">
+                SOLAR BATTERIES
               </Link>
-              <Link href="/contact" className="text-white font-bold hover:text-white/80 transition-colors">
-                CONTACT
+              <Link href="/solar-water-heaters" className="text-white font-bold hover:text-white/80 transition-colors">
+                SOLAR WATER HEATERS
+              </Link>
+              <Link href="/solar-outdoor-lights" className="text-white font-bold hover:text-white/80 transition-colors">
+                SOLAR OUTDOOR LIGHTS
+              </Link>
+              <Link href="/solar-water-pumps" className="text-white font-bold hover:text-white/80 transition-colors">
+                SOLAR WATER PUMPS
               </Link>
             </div>
 
@@ -86,31 +92,25 @@ export default function ShopNavigation() {
             </div>
           </div>
 
-          {/* Shop Navigation */}
+          {/* Main Site Navigation */}
           <div className="flex justify-between items-center px-4 py-2">
-            {/* Left Section - Shop Menu */}
+            {/* Left Section - Main Navigation */}
             <div className="flex items-center">
               <div className="hidden md:flex items-center gap-4">
-                <Link href="/shop" className="text-white font-bold hover:text-white/80 transition-colors">
-                  SHOP BY DEPARTMENT
+                <Link href="/" className="text-white font-bold hover:text-white/80 transition-colors">
+                  HOME
                 </Link>
-                <Link href="/solar-panels" className="text-white font-bold hover:text-white/80 transition-colors">
-                  SOLAR PANELS
+                <Link href="/about" className="text-white font-bold hover:text-white/80 transition-colors">
+                  ABOUT
                 </Link>
-                <Link href="/solar-inverters" className="text-white font-bold hover:text-white/80 transition-colors">
-                  SOLAR INVERTERS
+                <Link href="/services" className="text-white font-bold hover:text-white/80 transition-colors">
+                  SERVICES
                 </Link>
-                <Link href="/solar-batteries" className="text-white font-bold hover:text-white/80 transition-colors">
-                  SOLAR BATTERIES
+                <Link href="/blog" className="text-white font-bold hover:text-white/80 transition-colors">
+                  BLOG
                 </Link>
-                <Link href="/solar-water-heaters" className="text-white font-bold hover:text-white/80 transition-colors">
-                  SOLAR WATER HEATERS
-                </Link>
-                <Link href="/solar-outdoor-lights" className="text-white font-bold hover:text-white/80 transition-colors">
-                  SOLAR OUTDOOR LIGHTS
-                </Link>
-                <Link href="/solar-water-pumps" className="text-white font-bold hover:text-white/80 transition-colors">
-                  SOLAR WATER PUMPS
+                <Link href="/contact" className="text-white font-bold hover:text-white/80 transition-colors">
+                  CONTACT
                 </Link>
               </div>
             </div>
