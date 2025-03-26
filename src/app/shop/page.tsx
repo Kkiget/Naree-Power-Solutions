@@ -39,6 +39,87 @@ function ShopContent() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Top Support Bar */}
+      <div className="bg-orange-600 text-white py-1 px-4">
+        <div className="container mx-auto flex justify-between items-center text-sm">
+          <span>
+            Need Quick Support?{' '}
+            <a href="mailto:sales@solarshop.co.ke" className="font-bold hover:underline">
+              Send Us an Email
+            </a>
+          </span>
+          <span>
+            Call Us Now: (+254) 722863668 | (+254) 722699112
+          </span>
+        </div>
+      </div>
+
+      {/* Navigation Bar */}
+      <div className="bg-orange-500">
+        <div className="container mx-auto flex items-center justify-between px-4 py-2">
+          {/* Logo */}
+          <div className="flex items-center">
+            <Image 
+              src="/images/NAREE POWER 3B.png" 
+              alt="Naree Power Logo" 
+              width={400} 
+              height={200}
+              className="h-12 w-auto"
+            />
+          </div>
+
+          {/* Navigation Links */}
+          <div className="hidden md:flex items-center gap-4">
+            <Link href="/shop" className="text-white font-bold hover:text-white/80 transition-colors">
+              SHOP BY DEPARTMENT
+            </Link>
+            <Link href="/solar-panels" className="text-white font-bold hover:text-white/80 transition-colors">
+              SOLAR PANELS
+            </Link>
+            <Link href="/solar-inverters" className="text-white font-bold hover:text-white/80 transition-colors">
+              SOLAR INVERTERS
+            </Link>
+            <Link href="/solar-batteries" className="text-white font-bold hover:text-white/80 transition-colors">
+              SOLAR BATTERIES
+            </Link>
+            <Link href="/solar-water-heaters" className="text-white font-bold hover:text-white/80 transition-colors">
+              SOLAR WATER HEATERS
+            </Link>
+            <Link href="/solar-outdoor-lights" className="text-white font-bold hover:text-white/80 transition-colors">
+              SOLAR OUTDOOR LIGHTS
+            </Link>
+            <Link href="/solar-water-pumps" className="text-white font-bold hover:text-white/80 transition-colors">
+              SOLAR WATER PUMPS
+            </Link>
+          </div>
+
+          {/* Search Bar */}
+          <div className="flex items-center bg-white rounded-lg p-1">
+            <input
+              type="text"
+              placeholder="I'm shopping for..."
+              className="border-none px-2 py-1 outline-none"
+            />
+            <button className="text-orange-500">
+              🔍
+            </button>
+          </div>
+
+          {/* Cart Section */}
+          <div className="flex items-center gap-4">
+            <Link href="/login" className="text-white hover:text-white/80 transition-colors">
+              Login | My Account
+            </Link>
+            <Link href="/wishlist" className="text-white hover:text-white/80 transition-colors">
+              Favorite | My Wishlist
+            </Link>
+            <Link href="/cart" className="text-white hover:text-white/80 transition-colors">
+              🛒 Your Cart: KSh {cartTotal}
+            </Link>
+          </div>
+        </div>
+      </div>
+
       {/* Hero Section */}
       <div className="relative h-[300px] bg-gradient-to-r from-black to-gray-800">
         <div className="absolute inset-0">
@@ -182,44 +263,23 @@ function ShopContent() {
       )}
 
       {/* Product Grid */}
-      <div className="container mx-auto px-4 py-12">
-        {selectedCategory ? (
-          <div className="mb-12">
-            <h2 className="text-2xl font-bold mb-6">{selectedCategory}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredProducts.map(product => (
-                <ProductCard key={product.id} product={product} addToCart={addToCart} formatPrice={formatPrice} />
-              ))}
-            </div>
-          </div>
-        ) : (
-          categories.map(category => (
-            <div key={category} className="mb-12">
-              <h2 className="text-2xl font-bold mb-6">{category}</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {filteredProducts
-                  .filter(product => product.category === category)
-                  .map(product => (
-                    <ProductCard key={product.id} product={product} addToCart={addToCart} formatPrice={formatPrice} />
-                  ))}
-              </div>
-            </div>
-          ))
-        )}
-      </div>
-
-      {/* Energy Solutions Banner */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-gray-800 mb-8">Need Something Special?</h2>
-          <Link 
-            href="/contact-us"
-            className="inline-block bg-orange-500 text-white px-8 py-3 rounded-lg hover:bg-orange-600 transition-colors"
-          >
-            Contact Us For Custom Solutions
-          </Link>
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filteredProducts.map(product => (
+            <ProductCard key={product.id} product={product} addToCart={addToCart} formatPrice={formatPrice} />
+          ))}
         </div>
-      </section>
+
+        {/* Featured Products Section */}
+        <div className="mt-12">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">Featured Products</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {filteredProducts.slice(0, 6).map(product => (
+              <ProductCard key={product.id} product={product} addToCart={addToCart} formatPrice={formatPrice} />
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -233,8 +293,8 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, addToCart, formatPrice }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-4">
-      <div className="relative w-full h-48 mb-4">
+    <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+      <div className="relative w-full h-64 mb-4">
         <Image
           src={product.image}
           alt={product.name}
@@ -242,9 +302,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, addToCart, formatPri
           className="object-contain"
         />
       </div>
-      <div className="space-y-2">
-        <h3 className="text-lg font-semibold text-gray-900">{product.name}</h3>
-        <p className="text-gray-600 text-sm mb-4 line-clamp-2">{product.description}</p>
+      <div className="p-3 space-y-2">
+        <h3 className="text-base font-medium text-gray-900">{product.name}</h3>
+        <p className="text-gray-600 text-sm line-clamp-2">{product.description}</p>
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <span className="text-orange-600 font-semibold text-lg">{formatPrice(product.price)}</span>
@@ -256,9 +316,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, addToCart, formatPri
           </div>
           <button 
             onClick={() => addToCart(product)}
-            className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition-colors"
+            className="bg-orange-500 text-white px-3 py-2 rounded hover:bg-orange-600 transition-colors flex items-center space-x-2"
           >
-            Add to Cart
+            <FaShoppingCart className="text-sm" />
+            <span>Add to Cart</span>
           </button>
         </div>
       </div>
