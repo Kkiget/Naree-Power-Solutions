@@ -39,7 +39,7 @@ const ShopContext = createContext<ShopContextType | undefined>(undefined);
 // Create a provider component
 export function ShopProvider({ children }: { children: ReactNode }) {
   // Product data
-  const products = [
+  const [products, setProducts] = useState<Product[]>([
     // Solar Panels
     {
       id: 'sp1',
@@ -128,7 +128,7 @@ export function ShopProvider({ children }: { children: ReactNode }) {
       category: 'Batteries',
       description: '12V LiFePO4 battery with BMS'
     },
-  ];
+  ]);
 
   // State
   const [cart, setCart] = useState<Product[]>([]);
