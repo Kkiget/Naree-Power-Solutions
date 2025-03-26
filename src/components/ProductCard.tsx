@@ -1,73 +1,52 @@
-import React from 'react';
+'use client';
+
 import Image from 'next/image';
+import { Product, formatPrice } from '@/app/shop/data';
 
 interface ProductCardProps {
-  image: string;
-  category: string;
-  name: string;
-  rating: number;
-  originalPrice: string;
-  discountedPrice: string;
-  discountPercentage?: number;
-  onAddToCart?: () => void;
+  product: Product;
+  addToCart: (product: Product) => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({
-  image,
-  category,
-  name,
-  rating,
-  originalPrice,
-  discountedPrice,
-  discountPercentage,
-  onAddToCart
-}) => {
-  const filledStars = Math.floor(rating);
-  const hasHalfStar = rating % 1 !== 0;
-
+export default function ProductCard({ product, addToCart }: ProductCardProps) {
   return (
-    <div className="w-72 bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-      {discountPercentage && (
-        <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
-          -{discountPercentage}%
-        </div>
-      )}
-      <div className="relative h-48 w-full">
-        <Image
-          src={image}
-          alt={name}
+    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="relative aspect-square">
+        <Image 
+          src={product.image}
+          alt={product.name}
           fill
-          className="object-cover rounded-t-lg"
+          className="object-contain"
         />
+        {product.discount && (
+          <div className="absolute top-2 right-2 bg-orange-600 text-white text-xs font-semibold px-2 py-1 rounded">
+            -{product.discount}%
+          </div>
+        )}
+        {product.isHot && (
+          <div className="absolute top-2 left-2 bg-orange-800 text-white text-xs font-semibold px-2 py-1 rounded">
+            Hot Deal
+          </div>
+        )}
       </div>
       <div className="p-4">
-        <p className="text-gray-500 text-xs uppercase tracking-wider">{category}</p>
-        <h3 className="text-lg font-bold mt-2">{name}</h3>
-        <div className="flex items-center mt-1" aria-label={`Rating: ${rating} out of 5`}>
-          {[...Array(filledStars)].map((_, i) => (
-            <span key={i} className="text-yellow-400">★</span>
-          ))}
-          {hasHalfStar && (
-            <span className="text-yellow-400">½</span>
+        <h3 className="text-lg font-semibold text-gray-800">{product.name}</h3>
+        <p className="mt-1 text-gray-600 line-clamp-2">{product.description}</p>
+        <div className="mt-2 flex items-center">
+          <p className="text-xl font-bold text-orange-600">{formatPrice(product.price)}</p>
+          {product.originalPrice && (
+            <p className="ml-2 text-sm text-gray-500 line-through">
+              {formatPrice(product.originalPrice)}
+            </p>
           )}
-          {[...Array(5 - filledStars - (hasHalfStar ? 1 : 0))].map((_, i) => (
-            <span key={i} className="text-gray-300">★</span>
-          ))}
         </div>
-        <div className="mt-2">
-          <span className="line-through text-gray-400 text-sm">{originalPrice}</span>
-          <span className="text-red-500 text-xl font-bold ml-2">{discountedPrice}</span>
-        </div>
-        <button
-          onClick={onAddToCart}
-          className="mt-4 w-full bg-gray-900 text-white py-2 rounded flex justify-center items-center hover:bg-gray-800 transition-colors duration-200"
-          aria-label="Add to cart"
+        <button 
+          onClick={() => addToCart(product)}
+          className="mt-4 w-full bg-orange-600 text-white py-2 px-4 rounded hover:bg-orange-700 transition-colors"
         >
-          ADD TO CART
+          Add to Cart
         </button>
       </div>
     </div>
   );
-};
-
-export default ProductCard;
+}

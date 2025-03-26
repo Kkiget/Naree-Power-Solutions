@@ -1,0 +1,10 @@
+'use client';
+
+import dynamic from 'next/dynamic';
+
+// Dynamically import the enhanced Shop component
+const EnhancedShop = dynamic(() => import('@/modules/shop/Shop'), { ssr: false });
+
+export default function ShopPage() {
+  return <EnhancedShop />;
+}

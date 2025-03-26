@@ -19,7 +19,7 @@ export default function Navigation() {
   ];
 
   return (
-    <nav className="bg-gradient-to-b from-gray-900 to-black text-white sticky top-0 z-50">
+    <nav className="bg-gradient-to-b from-gray-900 to-black text-white z-10">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-20">
           <Link href="/" className="flex items-center">

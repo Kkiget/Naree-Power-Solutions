@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useShop } from '@/context/ShopContext';
+import { useShop } from '../context/ShopContext';
 
 export default function ShopNavigation() {
   const { categories } = useShop();

@@ -5,7 +5,7 @@ import { FaSolarPanel, FaBatteryFull, FaTools, FaLightbulb, FaCogs, FaMapMarkedA
 import Testimonials from "@/components/Testimonials";
 import Newsletter from "@/components/Newsletter";
 import NewsInsights from "@/components/NewsInsights";
-import EnergySavingsCalculator from "@/components/EnergySavingsCalc";
+import EnergySavingsCalculator from "@/components/EnergySavingsCalculator";
 import ProjectShowcase from "@/components/ProjectShowcase";
 import ServiceCard from "@/components/ServiceCard";
 
