@@ -43,27 +43,6 @@ function ShopContent() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      {/* Hero Section */}
-      <div className="relative h-[300px] bg-gradient-to-r from-black to-gray-800">
-        <div className="absolute inset-0">
-          <Image 
-            src="/solar-panels-roof-solar-cell.jpg"
-            alt="Solar Shop Banner"
-            fill
-            className="object-cover opacity-40"
-            priority
-          />
-        </div>
-        <div className="relative container mx-auto px-4 h-full flex flex-col justify-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Solar Products Shop
-          </h1>
-          <p className="text-xl text-white">
-            High-quality solar equipment at competitive prices
-          </p>
-        </div>
-      </div>
-
       {/* Shop Controls */}
       <div className="bg-white shadow-md">
         <div className="container mx-auto px-4 py-4">
@@ -191,16 +170,6 @@ function ShopContent() {
           <ProductCard key={product.id} product={product} addToCart={addToCart} formatPrice={formatPrice} />
         ))}
       </div>
-
-      {/* Featured Products Section */}
-      <div className="mt-12">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">Featured Products</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredProducts.slice(0, 6).map(product => (
-            <ProductCard key={product.id} product={product} addToCart={addToCart} formatPrice={formatPrice} />
-          ))}
-        </div>
-      </div>
     </div>
   );
 }
@@ -212,38 +181,28 @@ interface ProductCardProps {
   formatPrice: (price: number) => string;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, addToCart, formatPrice }) => {
+function ProductCard({ product, addToCart, formatPrice }: ProductCardProps) {
   return (
-    <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
-      <div className="relative w-full h-64 mb-4">
-        <Image
+    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="relative aspect-square">
+        <Image 
           src={product.image}
           alt={product.name}
           fill
           className="object-contain"
         />
       </div>
-      <div className="p-3 space-y-2">
-        <h3 className="text-base font-medium text-gray-900">{product.name}</h3>
-        <p className="text-gray-600 text-sm line-clamp-2">{product.description}</p>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <span className="text-orange-600 font-semibold text-lg">{formatPrice(product.price)}</span>
-            {product.originalPrice && (
-              <span className="text-gray-500 text-sm ml-2 line-through">
-                {formatPrice(product.originalPrice)}
-              </span>
-            )}
-          </div>
-          <button 
-            onClick={() => addToCart(product)}
-            className="bg-orange-500 text-white px-3 py-2 rounded hover:bg-orange-600 transition-colors flex items-center space-x-2"
-          >
-            <FaShoppingCart className="text-sm" />
-            <span>Add to Cart</span>
-          </button>
-        </div>
+      <div className="p-4">
+        <h3 className="text-lg font-semibold text-gray-800">{product.name}</h3>
+        <p className="mt-1 text-gray-600">{product.description}</p>
+        <p className="mt-2 text-xl font-bold text-orange-600">{formatPrice(product.price)}</p>
+        <button 
+          onClick={() => addToCart(product)}
+          className="mt-4 w-full bg-orange-600 text-white py-2 px-4 rounded hover:bg-orange-700 transition-colors"
+        >
+          Add to Cart
+        </button>
       </div>
     </div>
   );
-};
+}
