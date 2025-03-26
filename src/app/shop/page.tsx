@@ -25,19 +25,6 @@ export default function Shop() {
 
 // Shop Navigation Component
 function ShopNavigation() {
-  const { 
-    cart, 
-    cartTotal,
-    removeFromCart,
-    updateQuantity
-  } = useShop();
-  
-  const [showCart, setShowCart] = useState(false);
-
-  const formatPrice = (price: number) => {
-    return `KSh ${price.toLocaleString()}`;
-  };
-
   return (
     <div className="bg-white shadow-md">
       <div className="container mx-auto px-4 py-4">
@@ -68,10 +55,9 @@ function ShopNavigation() {
           {/* Cart Button */}
           <button 
             className="flex items-center space-x-2 bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition-colors"
-            onClick={() => setShowCart(!showCart)}
           >
             <FaShoppingCart />
-            <span>Cart ({cart.reduce((total, item) => total + (item.quantity || 1), 0)})</span>
+            <span>Cart (0)</span>
           </button>
         </div>
       </div>
