@@ -4,6 +4,7 @@ import "./globals.css";
 import "./fonts.css";
 import { ReactNode } from "react";
 import { ShopProvider } from '@/context/ShopContext';
+import ClientLayout from '@/components/ClientLayout';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -46,7 +47,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ShopProvider>
-          {children}
+          <ClientLayout>
+            {children}
+          </ClientLayout>
         </ShopProvider>
       </body>
     </html>
