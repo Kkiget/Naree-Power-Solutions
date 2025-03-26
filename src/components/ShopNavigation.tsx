@@ -7,10 +7,25 @@ import { FaSearch } from 'react-icons/fa';
 export default function ShopNavigation() {
   return (
     <>
-      {/* Combined Navigation */}
+      {/* Support Bar */}
+      <div className="bg-orange-600 text-white py-1 px-4">
+        <div className="container mx-auto flex justify-between items-center text-sm">
+          <span>
+            Need Quick Support?{' '}
+            <a href="mailto:sales@solarshop.co.ke" className="font-bold hover:underline">
+              Send Us an Email
+            </a>
+          </span>
+          <span>
+            Call Us Now: (+254) 722863668 | (+254) 722699112
+          </span>
+        </div>
+      </div>
+
+      {/* Main Navigation */}
       <div className="bg-orange-500">
         <div className="container mx-auto">
-          {/* Top Bar */}
+          {/* Top Navigation */}
           <div className="flex justify-between items-center px-4 py-2">
             {/* Left Section - Logo */}
             <div className="flex items-center">
@@ -23,28 +38,22 @@ export default function ShopNavigation() {
               />
             </div>
 
-            {/* Center Section - Navigation Menu */}
+            {/* Center Section - Main Navigation */}
             <div className="hidden md:flex items-center gap-4">
-              <Link href="/shop" className="text-white font-bold hover:text-white/80 transition-colors">
-                SHOP BY DEPARTMENT
+              <Link href="/" className="text-white font-bold hover:text-white/80 transition-colors">
+                HOME
               </Link>
-              <Link href="/solar-panels" className="text-white font-bold hover:text-white/80 transition-colors">
-                SOLAR PANELS
+              <Link href="/about" className="text-white font-bold hover:text-white/80 transition-colors">
+                ABOUT
               </Link>
-              <Link href="/solar-inverters" className="text-white font-bold hover:text-white/80 transition-colors">
-                SOLAR INVERTERS
+              <Link href="/services" className="text-white font-bold hover:text-white/80 transition-colors">
+                SERVICES
               </Link>
-              <Link href="/solar-batteries" className="text-white font-bold hover:text-white/80 transition-colors">
-                SOLAR BATTERIES
+              <Link href="/blog" className="text-white font-bold hover:text-white/80 transition-colors">
+                BLOG
               </Link>
-              <Link href="/solar-water-heaters" className="text-white font-bold hover:text-white/80 transition-colors">
-                SOLAR WATER HEATERS
-              </Link>
-              <Link href="/solar-outdoor-lights" className="text-white font-bold hover:text-white/80 transition-colors">
-                SOLAR OUTDOOR LIGHTS
-              </Link>
-              <Link href="/solar-water-pumps" className="text-white font-bold hover:text-white/80 transition-colors">
-                SOLAR WATER PUMPS
+              <Link href="/contact" className="text-white font-bold hover:text-white/80 transition-colors">
+                CONTACT
               </Link>
             </div>
 
@@ -77,18 +86,33 @@ export default function ShopNavigation() {
             </div>
           </div>
 
-          {/* Support Bar */}
-          <div className="bg-orange-600 text-white py-1 px-4">
-            <div className="container mx-auto flex justify-between items-center text-sm">
-              <span>
-                Need Quick Support?{' '}
-                <a href="mailto:sales@solarshop.co.ke" className="font-bold hover:underline">
-                  Send Us an Email
-                </a>
-              </span>
-              <span>
-                Call Us Now: (+254) 722863668 | (+254) 722699112
-              </span>
+          {/* Shop Navigation */}
+          <div className="flex justify-between items-center px-4 py-2">
+            {/* Left Section - Shop Menu */}
+            <div className="flex items-center">
+              <div className="hidden md:flex items-center gap-4">
+                <Link href="/shop" className="text-white font-bold hover:text-white/80 transition-colors">
+                  SHOP BY DEPARTMENT
+                </Link>
+                <Link href="/solar-panels" className="text-white font-bold hover:text-white/80 transition-colors">
+                  SOLAR PANELS
+                </Link>
+                <Link href="/solar-inverters" className="text-white font-bold hover:text-white/80 transition-colors">
+                  SOLAR INVERTERS
+                </Link>
+                <Link href="/solar-batteries" className="text-white font-bold hover:text-white/80 transition-colors">
+                  SOLAR BATTERIES
+                </Link>
+                <Link href="/solar-water-heaters" className="text-white font-bold hover:text-white/80 transition-colors">
+                  SOLAR WATER HEATERS
+                </Link>
+                <Link href="/solar-outdoor-lights" className="text-white font-bold hover:text-white/80 transition-colors">
+                  SOLAR OUTDOOR LIGHTS
+                </Link>
+                <Link href="/solar-water-pumps" className="text-white font-bold hover:text-white/80 transition-colors">
+                  SOLAR WATER PUMPS
+                </Link>
+              </div>
             </div>
           </div>
         </div>
