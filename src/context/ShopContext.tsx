@@ -39,7 +39,7 @@ const ShopContext = createContext<ShopContextType | undefined>(undefined);
 // Create a provider component
 export function ShopProvider({ children }: { children: ReactNode }) {
   // Product data
-  const [products, setProducts] = useState<Product[]>([
+  const [products] = useState<Product[]>([
     // Solar Panels
     {
       id: 'sp1',

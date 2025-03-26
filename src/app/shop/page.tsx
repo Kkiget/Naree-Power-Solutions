@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ShopProvider, useShop } from '@/context/ShopContext';
+import { ShopProvider, useShop, Product } from '@/context/ShopContext';
 import { FaShoppingCart, FaFilter, FaSearch } from 'react-icons/fa';
 
 // Main Shop Component
@@ -226,19 +226,8 @@ function ShopContent() {
 
 // Product Card Component
 interface ProductCardProps {
-  product: {
-    id: string;
-    name: string;
-    price: number;
-    originalPrice?: number;
-    image: string;
-    category: string;
-    description: string;
-    discount?: number;
-    isHot?: boolean;
-    quantity?: number;
-  };
-  addToCart: (product: any) => void;
+  product: Product;
+  addToCart: (product: Product) => void;
   formatPrice: (price: number) => string;
 }
 
