@@ -1,8 +1,12 @@
-import { type Metadata } from "next";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 import "./globals.css";
 import "./fonts.css";
 import { ReactNode } from "react";
-import ClientLayout from "@/components/ClientLayout";
+import { ShopProvider } from '@/context/ShopContext';
+import ShopNavigation from '@/components/ShopNavigation';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: "Naree Power Solutions",
@@ -41,10 +45,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="font-poppins antialiased">
-        <ClientLayout>
+      <body className={inter.className}>
+        <ShopProvider>
+          <ShopNavigation />
           {children}
-        </ClientLayout>
+        </ShopProvider>
       </body>
     </html>
   );
