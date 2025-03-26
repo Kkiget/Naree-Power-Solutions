@@ -2,8 +2,6 @@ import { type Metadata } from "next";
 import "./globals.css";
 import "./fonts.css";
 import { ReactNode } from "react";
-import ClientLayout from "@/components/ClientLayout";
-import ShopNavigation from "@/components/ShopNavigation";
 import PathnameProvider from "./components/PathnameProvider";
 
 export const metadata: Metadata = {

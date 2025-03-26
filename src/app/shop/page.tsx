@@ -26,14 +26,7 @@ export default function Shop() {
 // Shop Navigation Component
 function ShopNavigation() {
   const { 
-    filteredProducts, 
     cart, 
-    addToCart, 
-    selectedCategory, 
-    setSelectedCategory, 
-    searchQuery, 
-    setSearchQuery, 
-    categories,
     cartTotal,
     removeFromCart,
     updateQuantity
@@ -54,13 +47,9 @@ function ShopNavigation() {
             <FaFilter className="text-gray-500" />
             <select 
               className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-              value={selectedCategory || ''}
-              onChange={(e) => setSelectedCategory(e.target.value === '' ? null : e.target.value)}
+              value=""
             >
               <option value="">All Categories</option>
-              {categories.map(category => (
-                <option key={category} value={category}>{category}</option>
-              ))}
             </select>
           </div>
           
@@ -73,8 +62,6 @@ function ShopNavigation() {
               type="text"
               placeholder="Search products..."
               className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
           
@@ -87,70 +74,6 @@ function ShopNavigation() {
             <span>Cart ({cart.reduce((total, item) => total + (item.quantity || 1), 0)})</span>
           </button>
         </div>
-
-        {/* Cart Dropdown */}
-        {showCart && (
-          <div className="container mx-auto px-4 mt-4">
-            <div className="bg-white rounded-lg shadow-md p-4">
-              <h3 className="text-xl font-semibold mb-4">Shopping Cart</h3>
-              {cart.length === 0 ? (
-                <p className="text-gray-600">Your cart is empty</p>
-              ) : (
-                <div className="space-y-4">
-                  {cart.map((item, index) => (
-                    <div key={index} className="flex justify-between items-center p-2 border-b">
-                      <div className="flex items-center space-x-4">
-                        <Image
-                          src={item.image}
-                          alt={item.name}
-                          width={50}
-                          height={50}
-                          className="rounded"
-                        />
-                        <div>
-                          <h4 className="font-medium">{item.name}</h4>
-                          <p className="text-sm text-gray-600">{formatPrice(item.price)}</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center space-x-4">
-                        <button
-                          onClick={() => updateQuantity(item.id, (item.quantity || 1) - 1)}
-                          className="text-gray-500 hover:text-gray-700"
-                          disabled={item.quantity === 1}
-                        >
-                          -
-                        </button>
-                        <span className="w-8 text-center">{item.quantity}</span>
-                        <button
-                          onClick={() => updateQuantity(item.id, (item.quantity || 1) + 1)}
-                          className="text-gray-500 hover:text-gray-700"
-                        >
-                          +
-                        </button>
-                      </div>
-                      <button
-                        onClick={() => removeFromCart(item.id)}
-                        className="text-red-500 hover:text-red-700"
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  ))}
-                  <div className="flex justify-between items-center pt-4">
-                    <h4 className="font-semibold">Total:</h4>
-                    <p className="font-semibold text-orange-600">{formatPrice(cartTotal)}</p>
-                  </div>
-                  <button
-                    onClick={() => setShowCart(false)}
-                    className="w-full bg-orange-600 text-white py-2 px-4 rounded hover:bg-orange-700 transition-colors mt-4"
-                  >
-                    Continue Shopping
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
@@ -162,11 +85,6 @@ function ShopContent() {
     filteredProducts, 
     cart, 
     addToCart, 
-    selectedCategory, 
-    setSelectedCategory, 
-    searchQuery, 
-    setSearchQuery, 
-    categories,
     cartTotal,
     removeFromCart,
     updateQuantity
