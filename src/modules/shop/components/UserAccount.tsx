@@ -17,6 +17,7 @@ export default function UserAccount() {
   const [activeTab, setActiveTab] = useState<'orders' | 'wishlist' | 'reviews' | 'settings'>(
     (tabFromUrl as any) || 'orders'
   );
+  const [showWelcome, setShowWelcome] = useState(false);
   
   const { 
     wishlist, 
@@ -33,6 +34,16 @@ export default function UserAccount() {
       router.push('/signin?redirect=/account');
     }
   }, [isAuthenticated, router]);
+  
+  // Show welcome message if user just signed up
+  useEffect(() => {
+    const justSignedUp = localStorage.getItem('justSignedUp');
+    if (justSignedUp) {
+      setShowWelcome(true);
+      localStorage.removeItem('justSignedUp');
+      setTimeout(() => setShowWelcome(false), 5000);
+    }
+  }, []);
   
   // Handle tab changes from URL
   useEffect(() => {
@@ -52,267 +63,193 @@ export default function UserAccount() {
       </div>
     );
   }
-  
-  const handleSignOut = () => {
-    logout();
-    router.push('/');
-  };
-  
-  const handleTabChange = (tab: 'orders' | 'wishlist' | 'reviews' | 'settings') => {
-    setActiveTab(tab);
-    router.push(`/account?tab=${tab}`, { scroll: false });
-  };
-  
-  const renderTabContent = () => {
-    switch (activeTab) {
-      case 'orders':
-        return <OrderHistory />;
-        
-      case 'wishlist':
-        return (
-          <div className="py-8">
-            <h2 className="text-3xl font-bold mb-8 text-gray-800">My Wishlist</h2>
-            
-            {wishlist.length === 0 ? (
-              <div className="text-center p-8 bg-gray-50 rounded-lg">
-                <p className="text-gray-500 mb-4">Your wishlist is empty.</p>
-                <Link
-                  href="/shop"
-                  className="bg-orange-600 text-white py-2 px-6 rounded hover:bg-orange-700 transition-colors inline-block"
-                >
-                  Browse Products
-                </Link>
+
+  return (
+    <div className="container mx-auto px-4 py-12">
+      {showWelcome && (
+        <div className="mb-6 p-4 bg-green-50 text-green-700 rounded-md">
+          Welcome to your account, {currentUser.firstName}! Let's get started with your shopping journey.
+        </div>
+      )}
+      
+      <div className="flex flex-col md:flex-row gap-8">
+        {/* Sidebar */}
+        <div className="w-full md:w-1/4">
+          <div className="bg-white rounded-lg shadow p-4 mb-4">
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 rounded-full overflow-hidden">
+                <Image
+                  src="/images/default-avatar.png"
+                  alt="Profile"
+                  width={64}
+                  height={64}
+                />
               </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {wishlist.map(product => (
-                  <div key={product.id} className="border border-gray-200 rounded-lg overflow-hidden">
-                    <div className="relative aspect-square bg-gray-50">
-                      <Image 
-                        src={product.image}
-                        alt={product.name}
-                        fill
-                        className="object-contain p-4"
-                      />
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-semibold text-gray-800 mb-1">{product.name}</h3>
-                      <p className="text-orange-600 font-bold mb-3">{formatPrice(product.price)}</p>
-                      
-                      <div className="flex flex-col sm:flex-row gap-2">
-                        <button 
-                          onClick={() => addToCart(product)}
-                          className="flex-1 bg-orange-600 text-white py-2 px-4 rounded hover:bg-orange-700 transition-colors"
+              <div>
+                <h2 className="text-xl font-semibold text-gray-800">
+                  {currentUser.firstName} {currentUser.lastName}
+                </h2>
+                <p className="text-gray-600">{currentUser.email}</p>
+              </div>
+            </div>
+          </div>
+
+          <nav className="space-y-1">
+            <Link
+              href="/account?tab=orders"
+              className={`block px-4 py-2 text-sm font-medium rounded-md ${
+                activeTab === 'orders' ? 'bg-orange-50 text-orange-600' : 'text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              <FaShoppingBag className="inline-block mr-2" /> Orders
+            </Link>
+            <Link
+              href="/account?tab=wishlist"
+              className={`block px-4 py-2 text-sm font-medium rounded-md ${
+                activeTab === 'wishlist' ? 'bg-orange-50 text-orange-600' : 'text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              <FaHeart className="inline-block mr-2" /> Wishlist ({wishlist.length})
+            </Link>
+            <Link
+              href="/account?tab=reviews"
+              className={`block px-4 py-2 text-sm font-medium rounded-md ${
+                activeTab === 'reviews' ? 'bg-orange-50 text-orange-600' : 'text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              <FaCommentAlt className="inline-block mr-2" /> Reviews
+            </Link>
+            <Link
+              href="/account?tab=settings"
+              className={`block px-4 py-2 text-sm font-medium rounded-md ${
+                activeTab === 'settings' ? 'bg-orange-50 text-orange-600' : 'text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              <FaCog className="inline-block mr-2" /> Settings
+            </Link>
+            <button
+              onClick={logout}
+              className="block px-4 py-2 text-sm font-medium rounded-md text-red-600 hover:bg-red-50"
+            >
+              <FaSignOutAlt className="inline-block mr-2" /> Logout
+            </button>
+          </nav>
+        </div>
+
+        {/* Main Content */}
+        <div className="w-full md:w-3/4">
+          {activeTab === 'orders' && (
+            <div className="bg-white rounded-lg shadow p-6">
+              <h2 className="text-2xl font-bold mb-6">Order History</h2>
+              <OrderHistory />
+            </div>
+          )}
+          {activeTab === 'wishlist' && (
+            <div className="bg-white rounded-lg shadow p-6">
+              <h2 className="text-2xl font-bold mb-6">Wishlist</h2>
+              {wishlist.length === 0 ? (
+                <div className="text-center py-12">
+                  <FaHeart className="mx-auto h-12 w-12 text-gray-400" />
+                  <h3 className="mt-2 text-sm font-medium text-gray-900">Your wishlist is empty</h3>
+                  <p className="mt-1 text-sm text-gray-500">Start adding items to your wishlist.</p>
+                  <div className="mt-6">
+                    <Link
+                      href="/shop"
+                      className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                    >
+                      Browse Products
+                    </Link>
+                  </div>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {wishlist.map((product) => (
+                    <div key={product.id} className="bg-white rounded-lg shadow p-4">
+                      <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200">
+                        <Image
+                          src={product.image}
+                          alt={product.name}
+                          style={{
+                            width: 200,
+                            height: 200,
+                          }}
+                          className="object-cover"
+                        />
+                      </div>
+                      <div className="mt-4">
+                        <h3 className="text-sm text-gray-700">{product.name}</h3>
+                        <p className="mt-1 text-lg font-medium text-gray-900">{formatPrice(product.price)}</p>
+                      </div>
+                      <div className="mt-4 flex justify-between items-center">
+                        <button
+                          onClick={() => addToCart(product, 1)}
+                          className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
                         >
                           Add to Cart
                         </button>
-                        <button 
+                        <button
                           onClick={() => removeFromWishlist(product.id)}
-                          className="flex-1 bg-gray-200 text-gray-800 py-2 px-4 rounded hover:bg-gray-300 transition-colors"
+                          className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-red-600 hover:bg-red-50"
                         >
                           Remove
                         </button>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        );
-        
-      case 'reviews':
-        return (
-          <div className="py-8">
-            <h2 className="text-3xl font-bold mb-8 text-gray-800">My Reviews</h2>
-            
-            <div className="text-center p-8 bg-gray-50 rounded-lg">
-              <p className="text-gray-500 mb-4">You haven't written any reviews yet.</p>
-              <Link 
-                href="/shop"
-                className="bg-orange-600 text-white py-2 px-6 rounded hover:bg-orange-700 transition-colors inline-block"
-              >
-                Browse Products to Review
-              </Link>
+                  ))}
+                </div>
+              )}
             </div>
-          </div>
-        );
-        
-      case 'settings':
-        return (
-          <div className="py-8">
-            <h2 className="text-3xl font-bold mb-8 text-gray-800">Account Settings</h2>
-            
-            <div className="max-w-2xl mx-auto">
-              <div className="mb-8 p-6 bg-white rounded-lg shadow-sm">
-                <h3 className="text-xl font-semibold mb-6 text-gray-800">Personal Information</h3>
-                
-                <form className="space-y-4">
-                  <div>
-                    <label className="block text-gray-700 mb-2">First Name</label>
-                    <input 
-                      type="text" 
-                      defaultValue={currentUser.firstName}
-                      className="w-full p-3 border border-gray-300 rounded"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-gray-700 mb-2">Last Name</label>
-                    <input 
-                      type="text" 
-                      defaultValue={currentUser.lastName}
-                      className="w-full p-3 border border-gray-300 rounded"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-gray-700 mb-2">Email Address</label>
-                    <input 
-                      type="email" 
-                      defaultValue={currentUser.email}
-                      className="w-full p-3 border border-gray-300 rounded"
-                      readOnly
-                    />
-                    <p className="text-xs text-gray-500 mt-1">Email cannot be changed</p>
-                  </div>
-                  
-                  <div>
-                    <label className="block text-gray-700 mb-2">Phone Number</label>
-                    <input 
-                      type="tel" 
-                      defaultValue={currentUser.phone}
-                      className="w-full p-3 border border-gray-300 rounded"
-                    />
-                  </div>
-                  
-                  <button 
-                    type="submit"
-                    className="bg-orange-600 text-white py-2 px-6 rounded hover:bg-orange-700 transition-colors"
-                  >
-                    Save Changes
-                  </button>
-                </form>
-              </div>
-              
-              <div className="mb-8 p-6 bg-white rounded-lg shadow-sm">
-                <h3 className="text-xl font-semibold mb-6 text-gray-800">Change Password</h3>
-                
-                <form className="space-y-4">
-                  <div>
-                    <label className="block text-gray-700 mb-2">Current Password</label>
-                    <input 
-                      type="password" 
-                      className="w-full p-3 border border-gray-300 rounded"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-gray-700 mb-2">New Password</label>
-                    <input 
-                      type="password" 
-                      className="w-full p-3 border border-gray-300 rounded"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-gray-700 mb-2">Confirm New Password</label>
-                    <input 
-                      type="password" 
-                      className="w-full p-3 border border-gray-300 rounded"
-                    />
-                  </div>
-                  
-                  <button 
-                    type="submit"
-                    className="bg-orange-600 text-white py-2 px-6 rounded hover:bg-orange-700 transition-colors"
-                  >
-                    Update Password
-                  </button>
-                </form>
-              </div>
-              
-              <div className="p-6 bg-red-50 rounded-lg shadow-sm border border-red-100">
-                <h3 className="text-xl font-semibold mb-4 text-red-700">Delete Account</h3>
-                <p className="text-red-600 mb-4">Warning: This action is permanent and cannot be undone. All your data will be permanently removed.</p>
-                <button className="bg-red-600 text-white py-2 px-6 rounded hover:bg-red-700 transition-colors">
-                  Delete My Account
-                </button>
+          )}
+          {activeTab === 'reviews' && (
+            <div className="bg-white rounded-lg shadow p-6">
+              <h2 className="text-2xl font-bold mb-6">My Reviews</h2>
+              <div className="text-center py-12">
+                <FaCommentAlt className="mx-auto h-12 w-12 text-gray-400" />
+                <h3 className="mt-2 text-sm font-medium text-gray-900">No reviews yet</h3>
+                <p className="mt-1 text-sm text-gray-500">Start reviewing products after making purchases.</p>
               </div>
             </div>
-          </div>
-        );
-        
-      default:
-        return null;
-    }
-  };
-  
-  // Calculate account creation date
-  const memberSince = new Date(parseInt(currentUser.id.split('-')[1])).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long'
-  });
-  
-  return (
-    <div className="container mx-auto px-4 pb-12">
-      <div className="bg-orange-600 text-white py-8 px-4 rounded-b-lg mb-8">
-        <div className="flex items-center mb-4">
-          <div className="w-16 h-16 rounded-full bg-white text-orange-600 flex items-center justify-center text-2xl mr-4">
-            <FaUser />
-          </div>
-          <div>
-            <h1 className="text-2xl font-bold">{currentUser.firstName} {currentUser.lastName}</h1>
-            <p className="text-orange-100">Member since {memberSince}</p>
-          </div>
-        </div>
-      </div>
-      
-      <div className="flex flex-col lg:flex-row gap-8">
-        {/* Sidebar */}
-        <div className="lg:w-1/4">
-          <div className="bg-white rounded-lg shadow-sm overflow-hidden sticky top-24">
-            <nav>
-              <ul>
-                {[
-                  { id: 'orders', label: 'My Orders', icon: <FaShoppingBag /> },
-                  { id: 'wishlist', label: 'My Wishlist', icon: <FaHeart /> },
-                  { id: 'reviews', label: 'My Reviews', icon: <FaCommentAlt /> },
-                  { id: 'settings', label: 'Account Settings', icon: <FaCog /> }
-                ].map(item => (
-                  <li key={item.id}>
-                    <button
-                      onClick={() => handleTabChange(item.id as any)}
-                      className={`w-full flex items-center px-6 py-4 ${
-                        activeTab === item.id
-                          ? 'bg-orange-50 text-orange-600 border-l-4 border-orange-600'
-                          : 'text-gray-700 hover:bg-gray-50'
-                      }`}
-                    >
-                      <span className="mr-3">{item.icon}</span>
-                      {item.label}
-                    </button>
-                  </li>
-                ))}
-                <li>
-                  <button 
-                    onClick={handleSignOut}
-                    className="w-full flex items-center px-6 py-4 text-gray-700 hover:bg-gray-50"
-                  >
-                    <span className="mr-3"><FaSignOutAlt /></span>
-                    Sign Out
-                  </button>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-        
-        {/* Main Content */}
-        <div className="lg:w-3/4">
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            {renderTabContent()}
-          </div>
+          )}
+          {activeTab === 'settings' && (
+            <div className="bg-white rounded-lg shadow p-6">
+              <h2 className="text-2xl font-bold mb-6">Account Settings</h2>
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Full Name</label>
+                  <div className="mt-1">
+                    <input
+                      type="text"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm"
+                      value={`${currentUser.firstName} ${currentUser.lastName}`}
+                      disabled
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Email</label>
+                  <div className="mt-1">
+                    <input
+                      type="email"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm"
+                      value={currentUser.email}
+                      disabled
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Phone</label>
+                  <div className="mt-1">
+                    <input
+                      type="tel"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm"
+                      value={currentUser.phone}
+                      disabled
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

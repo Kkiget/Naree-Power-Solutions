@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import Image from 'next/image';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import AuthStatus from './AuthStatus';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,6 +44,9 @@ export default function Navigation() {
                 {item.label}
               </Link>
             ))}
+            <div className="ml-4">
+              <AuthStatus />
+            </div>
           </div>
 
           {/* Mobile Menu Button */}

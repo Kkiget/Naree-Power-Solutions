@@ -351,38 +351,29 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
   
   // Register function
   const register = async (userData: RegisterData): Promise<boolean> => {
-    // In a real application, this would make an API call
     try {
-      // Check if email already exists
-      if (sampleUsers.some(user => user.email === userData.email)) {
-        console.error("Email already exists");
-        return false;
+      // Simulate API call
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Registration failed');
       }
-      
-      // Create new user (in a real app, this would be stored in a database)
-      const newUser = {
-        id: `user-${Date.now()}`,
-        email: userData.email,
-        firstName: userData.firstName,
-        lastName: userData.lastName,
-        phone: userData.phone || '' 
-      };
-      
-      // Add to sample users (simulating database operation)
-      sampleUsers.push(newUser);
-      
-      // Login the new user automatically
-      const { password: _, ...userWithoutPassword } = newUser;
-      setCurrentUser(userWithoutPassword);
+
+      const result = await response.json();
+      setCurrentUser(result.user);
       setIsAuthenticated(true);
-      
-      return true;
+      return true; // Return success status
     } catch (error) {
-      console.error('Registration error:', error);
-      return false;
+      throw new Error('Registration failed. Please try again.');
     }
   };
-  
+
   // Forgot password function
   const forgotPassword = async (email: string): Promise<boolean> => {
     // In a real application, this would send a reset email
