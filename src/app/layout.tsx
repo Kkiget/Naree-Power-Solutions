@@ -2,8 +2,7 @@ import { type Metadata } from "next";
 import "./globals.css";
 import "./fonts.css";
 import { ReactNode } from "react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
+import ClientLayout from "@/components/ClientLayout";
 import PathnameProvider from "./components/PathnameProvider";
 
 export const metadata: Metadata = {
@@ -42,14 +41,10 @@ export default function RootLayout({
   children: ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className="font-poppins antialiased">
-        <Navigation />
-        <PathnameProvider>
-          {children}
-        </PathnameProvider>
-        <Footer />
-      </body>
-    </html>
+    <ClientLayout>
+      <PathnameProvider>
+        {children}
+      </PathnameProvider>
+    </ClientLayout>
   );
 }

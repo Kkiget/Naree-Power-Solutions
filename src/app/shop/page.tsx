@@ -16,52 +16,47 @@ export default function Shop() {
   return (
     <ShopProvider>
       <div className="min-h-screen bg-gray-50">
-        {isShopPage && <ShopNavigation />}
+        {isShopPage && (
+          <div className="bg-white shadow-md">
+            <div className="container mx-auto px-4 py-4">
+              <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                {/* Category Filter */}
+                <div className="flex items-center space-x-2">
+                  <FaFilter className="text-gray-500" />
+                  <select 
+                    className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    value=""
+                  >
+                    <option value="">All Categories</option>
+                  </select>
+                </div>
+                
+                {/* Search */}
+                <div className="relative flex-1 max-w-md mx-4">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FaSearch className="text-gray-400" />
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Search products..."
+                    className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  />
+                </div>
+                
+                {/* Cart Button */}
+                <button 
+                  className="flex items-center space-x-2 bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition-colors"
+                >
+                  <FaShoppingCart />
+                  <span>Cart (0)</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
         <ShopContent />
       </div>
     </ShopProvider>
-  );
-}
-
-// Shop Navigation Component
-function ShopNavigation() {
-  return (
-    <div className="bg-white shadow-md">
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          {/* Category Filter */}
-          <div className="flex items-center space-x-2">
-            <FaFilter className="text-gray-500" />
-            <select 
-              className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-              value=""
-            >
-              <option value="">All Categories</option>
-            </select>
-          </div>
-          
-          {/* Search */}
-          <div className="relative flex-1 max-w-md mx-4">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FaSearch className="text-gray-400" />
-            </div>
-            <input
-              type="text"
-              placeholder="Search products..."
-              className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
-            />
-          </div>
-          
-          {/* Cart Button */}
-          <button 
-            className="flex items-center space-x-2 bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition-colors"
-          >
-            <FaShoppingCart />
-            <span>Cart (0)</span>
-          </button>
-        </div>
-      </div>
-    </div>
   );
 }
 
