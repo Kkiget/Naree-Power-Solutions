@@ -7,17 +7,9 @@ import { FaShoppingCart, FaFilter, FaSearch } from 'react-icons/fa';
 
 // Main Shop Component
 export default function Shop() {
-  const [isShopPage, setIsShopPage] = useState(false);
-
-  useEffect(() => {
-    const pathname = document.querySelector('[data-pathname]')?.getAttribute('data-pathname');
-    setIsShopPage(pathname === '/shop');
-  }, []);
-
   return (
     <ShopProvider>
       <div className="min-h-screen bg-gray-50">
-        {isShopPage && <ShopNavigation />}
         <ShopContent />
       </div>
     </ShopProvider>
@@ -88,6 +80,70 @@ function ShopNavigation() {
             <span>Cart ({cart.reduce((total, item) => total + (item.quantity || 1), 0)})</span>
           </button>
         </div>
+
+        {/* Cart Dropdown */}
+        {showCart && (
+          <div className="container mx-auto px-4 mt-4">
+            <div className="bg-white rounded-lg shadow-md p-4">
+              <h3 className="text-xl font-semibold mb-4">Shopping Cart</h3>
+              {cart.length === 0 ? (
+                <p className="text-gray-600">Your cart is empty</p>
+              ) : (
+                <div className="space-y-4">
+                  {cart.map((item, index) => (
+                    <div key={index} className="flex justify-between items-center p-2 border-b">
+                      <div className="flex items-center space-x-4">
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          width={50}
+                          height={50}
+                          className="rounded"
+                        />
+                        <div>
+                          <h4 className="font-medium">{item.name}</h4>
+                          <p className="text-sm text-gray-600">{formatPrice(item.price)}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-4">
+                        <button
+                          onClick={() => updateQuantity(item.id, (item.quantity || 1) - 1)}
+                          className="text-gray-500 hover:text-gray-700"
+                          disabled={item.quantity === 1}
+                        >
+                          -
+                        </button>
+                        <span className="w-8 text-center">{item.quantity}</span>
+                        <button
+                          onClick={() => updateQuantity(item.id, (item.quantity || 1) + 1)}
+                          className="text-gray-500 hover:text-gray-700"
+                        >
+                          +
+                        </button>
+                      </div>
+                      <button
+                        onClick={() => removeFromCart(item.id)}
+                        className="text-red-500 hover:text-red-700"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ))}
+                  <div className="flex justify-between items-center pt-4">
+                    <h4 className="font-semibold">Total:</h4>
+                    <p className="font-semibold text-orange-600">{formatPrice(cartTotal)}</p>
+                  </div>
+                  <button
+                    onClick={() => setShowCart(false)}
+                    className="w-full bg-orange-600 text-white py-2 px-4 rounded hover:bg-orange-700 transition-colors mt-4"
+                  >
+                    Continue Shopping
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -120,74 +176,62 @@ function ShopContent() {
       {/* Cart Dropdown */}
       {showCart && (
         <div className="container mx-auto px-4 mt-4">
-          <div className="bg-white shadow-lg rounded-lg p-6 mb-6">
-            <h2 className="text-2xl font-bold mb-4">Your Cart</h2>
-            
+          <div className="bg-white rounded-lg shadow-md p-4">
+            <h3 className="text-xl font-semibold mb-4">Shopping Cart</h3>
             {cart.length === 0 ? (
-              <p className="text-gray-500">Your cart is empty</p>
+              <p className="text-gray-600">Your cart is empty</p>
             ) : (
-              <>
-                <div className="divide-y">
-                  {cart.map(item => (
-                    <div key={item.id} className="py-4 flex justify-between items-center">
-                      <div className="flex items-center space-x-4">
-                        <div className="relative w-16 h-16">
-                          <Image 
-                            src={item.image}
-                            alt={item.name}
-                            fill
-                            className="object-cover rounded"
-                          />
-                        </div>
-                        <div>
-                          <h3 className="font-medium">{item.name}</h3>
-                          <p className="text-gray-500">{formatPrice(item.price)} × {item.quantity}</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center space-x-4">
-                        <div className="flex items-center space-x-2">
-                          <button 
-                            onClick={() => updateQuantity(item.id, (item.quantity || 1) - 1)}
-                            className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-orange-100"
-                          >
-                            -
-                          </button>
-                          <span className="mx-2">{item.quantity}</span>
-                          <button 
-                            onClick={() => updateQuantity(item.id, (item.quantity || 1) + 1)}
-                            className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-orange-100"
-                          >
-                            +
-                          </button>
-                        </div>
-                        <button 
-                          onClick={() => removeFromCart(item.id)}
-                          className="text-red-500 hover:text-red-700"
-                        >
-                          Remove
-                        </button>
-                        <span className="font-bold">{formatPrice(item.price * (item.quantity || 1))}</span>
+              <div className="space-y-4">
+                {cart.map((item, index) => (
+                  <div key={index} className="flex justify-between items-center p-2 border-b">
+                    <div className="flex items-center space-x-4">
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        width={50}
+                        height={50}
+                        className="rounded"
+                      />
+                      <div>
+                        <h4 className="font-medium">{item.name}</h4>
+                        <p className="text-sm text-gray-600">{formatPrice(item.price)}</p>
                       </div>
                     </div>
-                  ))}
-                </div>
-                
-                <div className="mt-6 pt-4 border-t">
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="font-medium">Total:</span>
-                    <span className="text-xl font-bold">{formatPrice(cartTotal)}</span>
-                  </div>
-                  
-                  <div className="flex space-x-4">
-                    <button 
-                      className="flex-1 bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition-colors"
-                      onClick={() => alert('Checkout functionality coming soon!')}
+                    <div className="flex items-center space-x-4">
+                      <button
+                        onClick={() => updateQuantity(item.id, (item.quantity || 1) - 1)}
+                        className="text-gray-500 hover:text-gray-700"
+                        disabled={item.quantity === 1}
+                      >
+                        -
+                      </button>
+                      <span className="w-8 text-center">{item.quantity}</span>
+                      <button
+                        onClick={() => updateQuantity(item.id, (item.quantity || 1) + 1)}
+                        className="text-gray-500 hover:text-gray-700"
+                      >
+                        +
+                      </button>
+                    </div>
+                    <button
+                      onClick={() => removeFromCart(item.id)}
+                      className="text-red-500 hover:text-red-700"
                     >
-                      Checkout
+                      Remove
                     </button>
                   </div>
+                ))}
+                <div className="flex justify-between items-center pt-4">
+                  <h4 className="font-semibold">Total:</h4>
+                  <p className="font-semibold text-orange-600">{formatPrice(cartTotal)}</p>
                 </div>
-              </>
+                <button
+                  onClick={() => setShowCart(false)}
+                  className="w-full bg-orange-600 text-white py-2 px-4 rounded hover:bg-orange-700 transition-colors mt-4"
+                >
+                  Continue Shopping
+                </button>
+              </div>
             )}
           </div>
         </div>

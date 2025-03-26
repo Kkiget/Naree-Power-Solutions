@@ -1,16 +1,10 @@
-'use server';
-
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { type Metadata } from "next";
 import "./globals.css";
 import "./fonts.css";
 import { ReactNode } from "react";
-import { ShopProvider } from '@/context/ShopContext';
-import ClientLayout from '@/components/ClientLayout';
-import ShopNavigation from '@/components/ShopNavigation';
-import PathnameProvider from './components/PathnameProvider';
-
-const inter = Inter({ subsets: ['latin'] });
+import ClientLayout from "@/components/ClientLayout";
+import ShopNavigation from "@/components/ShopNavigation";
+import { usePathname } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Naree Power Solutions",
@@ -47,14 +41,21 @@ export default function RootLayout({
 }: {
   children: ReactNode
 }) {
+  const pathname = usePathname();
+  
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <ShopProvider>
-          <PathnameProvider>
+      <body className="font-poppins antialiased">
+        {pathname === '/shop' ? (
+          <>
+            <ShopNavigation />
             {children}
-          </PathnameProvider>
-        </ShopProvider>
+          </>
+        ) : (
+          <ClientLayout>
+            {children}
+          </ClientLayout>
+        )}
       </body>
     </html>
   );
