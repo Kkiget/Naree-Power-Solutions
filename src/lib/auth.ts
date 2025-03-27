@@ -19,6 +19,79 @@ const credentialsSchema = z.object({
   password: z.string().min(6),
 })
 
+// Role definitions
+export const ROLES = {
+  user: 'user',
+  admin: 'admin',
+  manager: 'manager',
+} as const
+
+export type Role = keyof typeof ROLES
+
+// Define all possible permissions
+const ALL_PERMISSIONS = [
+  'read:own_profile',
+  'update:own_profile',
+  'create:orders',
+  'read:own_orders',
+  'read:all_orders',
+  'update:order_status',
+  'read:customers',
+  'create:products',
+  'update:products',
+  'delete:products',
+  'manage:users',
+] as const;
+
+export type Permission = typeof ALL_PERMISSIONS[number];
+
+// Role-based permissions
+export const PERMISSIONS: Record<Role, Permission[]> = {
+  [ROLES.user]: [
+    'read:own_profile',
+    'update:own_profile',
+    'create:orders',
+    'read:own_orders',
+  ],
+  [ROLES.manager]: [
+    'read:own_profile',
+    'update:own_profile',
+    'create:orders',
+    'read:own_orders',
+    'read:all_orders',
+    'update:order_status',
+    'read:customers',
+  ],
+  [ROLES.admin]: [
+    'read:own_profile',
+    'update:own_profile',
+    'create:orders',
+    'read:own_orders',
+    'read:all_orders',
+    'update:order_status',
+    'read:customers',
+    'create:products',
+    'update:products',
+    'delete:products',
+    'manage:users',
+  ],
+} as const;
+
+// Helper function to check if a user has a specific permission
+export function hasPermission(userRole: Role, permission: Permission): boolean {
+  return PERMISSIONS[userRole]?.includes(permission) ?? false
+}
+
+// Helper function to check if a user has any of the required permissions
+export function hasAnyPermission(userRole: Role, permissions: Permission[]): boolean {
+  return permissions.some(permission => hasPermission(userRole, permission))
+}
+
+// Helper function to check if a user has all of the required permissions
+export function hasAllPermissions(userRole: Role, permissions: Permission[]): boolean {
+  return permissions.every(permission => hasPermission(userRole, permission))
+}
+
 export const authOptions: NextAuthOptions = {
   adapter: MongoDBAdapter(clientPromise),
   providers: [
