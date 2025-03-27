@@ -1,12 +1,18 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
-import { registerSchema } from '@/lib/validation';
-import { withRateLimit } from '@/lib/rate-limit';
+import { z } from 'zod';
 import clientPromise from '@/lib/mongodb';
+import { withRateLimit } from '@/lib/rate-limit';
 import crypto from 'crypto';
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+const registerSchema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  email: z.string().email('Invalid email address'),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
+});
 
 export async function POST(req: Request) {
   try {
@@ -38,7 +44,7 @@ export async function POST(req: Request) {
     const verificationExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
 
     // Create user
-    const user = await users.insertOne({
+    const result = await users.insertOne({
       name: validatedData.name,
       email: validatedData.email,
       password: hashedPassword,
@@ -68,12 +74,18 @@ export async function POST(req: Request) {
     return NextResponse.json(
       { 
         message: 'Registration successful. Please check your email to verify your account.',
-        userId: user.insertedId 
+        userId: result.insertedId.toString()
       },
       { status: 201 }
     );
   } catch (error) {
     console.error('Registration error:', error);
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { message: error.errors[0].message },
+        { status: 400 }
+      );
+    }
     return NextResponse.json(
       { message: 'Error creating user' },
       { status: 500 }

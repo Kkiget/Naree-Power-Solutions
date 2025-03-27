@@ -10,7 +10,9 @@ export default function AccountPage() {
 
   useEffect(() => {
     if (status === 'authenticated' && session?.user) {
-      setProfile(session.user.profile)
+      // Check if profile exists before setting
+      const userProfile = (session.user as any).profile || null;
+      setProfile(userProfile);
     }
   }, [status, session])
 

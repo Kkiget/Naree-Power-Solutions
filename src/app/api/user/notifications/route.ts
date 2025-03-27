@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server';
-import { auth } from '@/lib/auth';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import clientPromise from '@/lib/mongodb';
 import { withRateLimit } from '@/lib/rate-limit';
+import { ObjectId } from 'mongodb';
 import { z } from 'zod';
 
 const notificationSchema = z.object({
@@ -15,7 +17,7 @@ export async function GET(req: Request) {
     const rateLimitResult = await withRateLimit(req);
     if (rateLimitResult) return rateLimitResult;
 
-    const session = await auth();
+    const session = await getServerSession(authOptions);
     if (!session?.user) {
       return NextResponse.json(
         { message: 'Unauthorized' },
@@ -25,7 +27,7 @@ export async function GET(req: Request) {
 
     const client = await clientPromise;
     const users = client.db().collection('users');
-    const user = await users.findOne({ email: session.user.email });
+    const user = await users.findOne({ _id: new ObjectId(session.user.id) });
 
     if (!user) {
       return NextResponse.json(
@@ -53,7 +55,7 @@ export async function PUT(req: Request) {
     const rateLimitResult = await withRateLimit(req);
     if (rateLimitResult) return rateLimitResult;
 
-    const session = await auth();
+    const session = await getServerSession(authOptions);
     if (!session?.user) {
       return NextResponse.json(
         { message: 'Unauthorized' },
@@ -68,7 +70,7 @@ export async function PUT(req: Request) {
     const users = client.db().collection('users');
 
     await users.updateOne(
-      { email: session.user.email },
+      { _id: new ObjectId(session.user.id) },
       {
         $set: {
           emailOnLogin: validatedData.emailOnLogin,

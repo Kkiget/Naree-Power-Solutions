@@ -50,6 +50,7 @@ interface User {
   firstName: string;
   lastName: string;
   phone: string;
+  password?: string; // Optional password field for login
 }
 
 // Registration data interface
@@ -324,10 +325,10 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
   
   // Login function
   const login = async (email: string, password: string): Promise<boolean> => {
-    // In a real application, this would make an API call
-    // For demo purposes, we're just checking against our sample data
     try {
-      const user = sampleUsers.find(u => u.email === email && u.password === password);
+      // Type assertion for sample users that include password
+      const user = (sampleUsers as Array<User & { password: string }>)
+        .find(u => u.email === email && u.password === password);
       
       if (!user) {
         return false;

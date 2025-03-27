@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server';
-import { auth } from '@/lib/auth';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import clientPromise from '@/lib/mongodb';
 import { withRateLimit } from '@/lib/rate-limit';
+import { ObjectId } from 'mongodb';
 
 export async function DELETE(req: Request) {
   try {
@@ -9,7 +11,7 @@ export async function DELETE(req: Request) {
     const rateLimitResult = await withRateLimit(req, { interval: 86400, limit: 3 });
     if (rateLimitResult) return rateLimitResult;
 
-    const session = await auth();
+    const session = await getServerSession(authOptions);
     if (!session?.user) {
       return NextResponse.json(
         { message: 'Unauthorized' },
@@ -21,7 +23,7 @@ export async function DELETE(req: Request) {
     const users = client.db().collection('users');
 
     // Delete user
-    await users.deleteOne({ email: session.user.email });
+    await users.deleteOne({ _id: new ObjectId(session.user.id) });
 
     return NextResponse.json(
       { message: 'Account deleted successfully' },

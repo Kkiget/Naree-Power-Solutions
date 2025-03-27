@@ -1,38 +1,31 @@
 import { NextResponse } from 'next/server';
-import { auth } from '@/lib/auth';
-import clientPromise from '@/lib/mongodb';
-import { withRateLimit } from '@/lib/rate-limit';
-import { passwordSchema } from '@/lib/validation';
-import bcrypt from 'bcryptjs';
+import { getServerSession } from 'next-auth';
 import { z } from 'zod';
+import bcrypt from 'bcryptjs';
+import clientPromise from '@/lib/mongodb';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { ObjectId } from 'mongodb';
 
-const passwordUpdateSchema = z.object({
-  currentPassword: z.string(),
-  newPassword: passwordSchema,
+const passwordSchema = z.object({
+  currentPassword: z.string().min(1, 'Current password is required'),
+  newPassword: z.string().min(6, 'New password must be at least 6 characters'),
 });
 
 export async function PUT(req: Request) {
   try {
-    // Check rate limit (stricter for password changes)
-    const rateLimitResult = await withRateLimit(req, { interval: 3600, limit: 5 });
-    if (rateLimitResult) return rateLimitResult;
-
-    const session = await auth();
-    if (!session?.user) {
-      return NextResponse.json(
-        { message: 'Unauthorized' },
-        { status: 401 }
-      );
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
     }
 
     const body = await req.json();
-    const validatedData = passwordUpdateSchema.parse(body);
+    const validatedData = passwordSchema.parse(body);
 
     const client = await clientPromise;
     const users = client.db().collection('users');
 
     // Get user with current password
-    const user = await users.findOne({ email: session.user.email });
+    const user = await users.findOne({ _id: new ObjectId(session.user.id) });
     if (!user) {
       return NextResponse.json(
         { message: 'User not found' },
@@ -41,11 +34,7 @@ export async function PUT(req: Request) {
     }
 
     // Verify current password
-    const isValid = await bcrypt.compare(
-      validatedData.currentPassword,
-      user.password
-    );
-
+    const isValid = await bcrypt.compare(validatedData.currentPassword, user.password);
     if (!isValid) {
       return NextResponse.json(
         { message: 'Current password is incorrect' },
@@ -58,12 +47,12 @@ export async function PUT(req: Request) {
 
     // Update password
     await users.updateOne(
-      { email: session.user.email },
+      { _id: new ObjectId(session.user.id) },
       {
         $set: {
           password: hashedPassword,
           updatedAt: new Date(),
-        },
+        }
       }
     );
 
@@ -73,6 +62,12 @@ export async function PUT(req: Request) {
     );
   } catch (error) {
     console.error('Password update error:', error);
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { message: error.errors[0].message },
+        { status: 400 }
+      );
+    }
     return NextResponse.json(
       { message: 'Error updating password' },
       { status: 500 }
