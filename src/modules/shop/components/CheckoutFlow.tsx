@@ -416,7 +416,7 @@ export function Checkout() {
             </p>
             <div className="bg-orange-50 border border-orange-200 rounded p-4 mb-4">
               <p className="text-sm">
-                When you click "Place Order", an M-Pesa payment request will be sent to <strong>{formData.phone}</strong>.
+                When you click &quot;Place Order&quot;, an M-Pesa payment request will be sent to <strong>{formData.phone}</strong>.
                 Please enter your M-Pesa PIN to complete the transaction.
               </p>
             </div>
@@ -477,7 +477,7 @@ export function Checkout() {
             </p>
             <div className="bg-orange-50 border border-orange-200 rounded p-4">
               <p className="text-sm">
-                After clicking "Place Order", you'll be redirected to PayPal to complete your payment securely.
+                After clicking &quot;Place Order&quot;, you&apos;ll be redirected to PayPal to complete your payment securely.
               </p>
             </div>
           </div>

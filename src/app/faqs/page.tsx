@@ -69,7 +69,7 @@ export default function FAQPage() {
           <h2 className="text-2xl font-semibold text-gray-800 mb-6">Still Have Questions?</h2>
           <div className="space-y-4">
             <p className="text-gray-600">
-              If you can't find the answer to your question here, please feel free to contact our customer service team.
+              If you can&apos;t find the answer to your question here, please feel free to contact our customer service team.
             </p>
             <div className="flex flex-col md:flex-row gap-4">
               <Link 

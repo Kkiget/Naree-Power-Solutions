@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useShop, Review } from '../context/ShopContext';
+import { useShop } from '../context/ShopContext';
 import { FaStar, FaRegStar, FaCheck, FaThumbsUp } from 'react-icons/fa';
 
 interface ProductReviewsProps {
@@ -248,8 +248,9 @@ export default function ProductReviews({ productId }: ProductReviewsProps) {
         </div>
       ) : (
         <div className="text-center py-8 border border-gray-200 rounded-lg">
-          <p className="text-gray-500 mb-4">This product doesn't have any reviews yet.</p>
+          <p className="text-gray-500 mb-4">This product doesn&apos;t have any reviews yet.</p>
           <p className="text-gray-700">Be the first to share your experience with this product!</p>
+          <p className="mt-1 text-sm text-gray-500">Haven&apos;t purchased this item yet</p>
         </div>
       )}
     </div>

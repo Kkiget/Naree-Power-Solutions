@@ -3,8 +3,8 @@ import { getServerSession } from 'next-auth';
 import { z } from 'zod';
 import bcrypt from 'bcryptjs';
 import clientPromise from '@/lib/mongodb';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { ObjectId } from 'mongodb';
+import { authOptions } from '@/lib/auth';
 
 const passwordSchema = z.object({
   currentPassword: z.string().min(1, 'Current password is required'),

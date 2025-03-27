@@ -64,8 +64,9 @@ export default function SignIn() {
       
       // Redirect to account page after successful login
       window.location.href = '/account';
-    } catch (error) {
-      setErrors({ form: 'Invalid email or password. Please try again.' });
+    } catch (error:unknown) {
+      const err = error as Error;
+      setErrors({ form: `Invalid email or password. Please try again. ${err.message || ''}` });
     } finally {
       setIsSubmitting(false);
     }
@@ -102,7 +103,7 @@ export default function SignIn() {
             Sign in to your account
           </h2>
           <p className="mt-2 text-center text-gray-600">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <Link href="/signup" className="text-orange-600 hover:text-orange-500">
               Sign up
             </Link>

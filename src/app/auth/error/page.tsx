@@ -1,11 +1,12 @@
 import Link from 'next/link';
 
-export default function AuthError({
+export default async function AuthError({
   searchParams,
 }: {
-  searchParams: { error?: string };
+  searchParams: Promise<{ error?: string }>;
 }) {
-  const error = searchParams?.error || 'An error occurred during authentication';
+  const params = await searchParams;
+  const error = params?.error || 'An error occurred during authentication';
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">

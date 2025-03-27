@@ -1,4 +1,4 @@
-import { products, Product } from './products';
+import { products } from './products';
 
 // Get all unique categories from products
 export const getCategories = () => [...new Set(products.map(product => product.category))];

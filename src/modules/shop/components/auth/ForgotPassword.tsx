@@ -34,8 +34,9 @@ export default function ForgotPassword() {
       // This would be replaced with your actual API call
       await new Promise(resolve => setTimeout(resolve, 1500));
       setResetLinkSent(true);
-    } catch (error) {
-      setErrors({ form: 'An error occurred. Please try again.' });
+    } catch (error:unknown) {
+      const err = error as Error;
+      setErrors({ form: `An error occurred. Please try again. ${err.message || ''}` });
     } finally {
       setIsSubmitting(false);
     }
@@ -58,11 +59,11 @@ export default function ForgotPassword() {
             <div className="text-green-600 mt-6 mb-4 text-5xl">✓</div>
             <h2 className="text-2xl font-bold mb-4">Reset Link Sent</h2>
             <p className="text-gray-600 mb-6">
-              We've sent password reset instructions to <span className="font-medium">{email}</span>. 
+              We&apos;ve sent password reset instructions to <span className="font-medium">{email}</span>. 
               Please check your email inbox.
             </p>
             <p className="text-gray-500 text-sm mb-6">
-              If you don't see the email, please check your spam folder or request another link.
+              If you don&apos;t see the email, please check your spam folder or request another link.
             </p>
             <div className="space-y-3">
               <Link 
@@ -103,7 +104,7 @@ export default function ForgotPassword() {
             Reset your password
           </h2>
           <p className="mt-2 text-center text-gray-600">
-            Enter your email address and we'll send you a link to reset your password.
+            Enter your email address and we&apos;ll send you a link to reset your password.
           </p>
         </div>
         
@@ -158,7 +159,7 @@ export default function ForgotPassword() {
         
         <div className="text-center">
           <p className="text-sm text-gray-600">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <Link href="/signup" className="text-orange-600 hover:text-orange-500">
               Sign up
             </Link>

@@ -10,8 +10,8 @@ export default function AccountPage() {
 
   useEffect(() => {
     if (status === 'authenticated' && session?.user) {
-      // Check if profile exists before setting
-      const userProfile = (session.user as any).profile || null;
+      // Use type assertion with a more specific type
+      const userProfile = ((session.user as unknown) as { profile: ExtendedUser['profile'] }).profile || null;
       setProfile(userProfile);
     }
   }, [status, session])

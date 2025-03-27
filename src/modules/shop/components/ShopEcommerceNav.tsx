@@ -7,7 +7,7 @@ import { FaSearch, FaShoppingCart, FaHeart, FaUserCircle, FaBars, FaChevronDown,
 import { useShop } from '../context/ShopContext';
 
 export default function ShopEcommerceNav() {
-  const { cart, toggleCart, searchQuery, setSearchQuery, selectedCategory, setSelectedCategory } = useShop();
+  const { cart, toggleCart, searchQuery, setSearchQuery, setSelectedCategory } = useShop();
   const [showMobileSearch, setShowMobileSearch] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);

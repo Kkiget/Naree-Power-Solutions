@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { FaUser, FaShoppingBag, FaHeart, FaCommentAlt, FaCog, FaSignOutAlt } from 'react-icons/fa';
+import { FaShoppingBag, FaHeart, FaCommentAlt, FaCog, FaSignOutAlt } from 'react-icons/fa';
 import OrderHistory from './OrderHistory';
 import { useShop } from '../context/ShopContext';
 import { formatPrice } from '../data/utils';
@@ -15,7 +15,7 @@ export default function UserAccount() {
   const tabFromUrl = searchParams.get('tab');
   
   const [activeTab, setActiveTab] = useState<'orders' | 'wishlist' | 'reviews' | 'settings'>(
-    (tabFromUrl as any) || 'orders'
+    (tabFromUrl as 'orders' | 'wishlist' | 'reviews' | 'settings') || 'orders'
   );
   const [showWelcome, setShowWelcome] = useState(false);
   
@@ -48,7 +48,7 @@ export default function UserAccount() {
   // Handle tab changes from URL
   useEffect(() => {
     if (tabFromUrl && ['orders', 'wishlist', 'reviews', 'settings'].includes(tabFromUrl)) {
-      setActiveTab(tabFromUrl as any);
+      setActiveTab(tabFromUrl as 'orders' | 'wishlist' | 'reviews' | 'settings');
     }
   }, [tabFromUrl]);
   
@@ -68,7 +68,7 @@ export default function UserAccount() {
     <div className="container mx-auto px-4 py-12">
       {showWelcome && (
         <div className="mb-6 p-4 bg-green-50 text-green-700 rounded-md">
-          Welcome to your account, {currentUser.firstName}! Let's get started with your shopping journey.
+          Welcome to your account, {currentUser.firstName}! Let&apos;s get started with your shopping journey.
         </div>
       )}
       
@@ -182,7 +182,7 @@ export default function UserAccount() {
                       </div>
                       <div className="mt-4 flex justify-between items-center">
                         <button
-                          onClick={() => addToCart(product, )}
+                          onClick={() => addToCart(product, 1)}
                           className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
                         >
                           Add to Cart

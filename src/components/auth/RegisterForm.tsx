@@ -35,8 +35,9 @@ export default function RegisterForm() {
         const error = await res.json();
         setError(error.message);
       }
-    } catch (error) {
-      setError('An error occurred during registration');
+    } catch (error:unknown) {
+      const err = error as Error;
+      setError(`An error occurred during registration. ${err.message || ''}`);
     } finally {
       setLoading(false);
     }

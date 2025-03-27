@@ -167,8 +167,9 @@ export default function AccountSettings({ user }: AccountSettingsProps) {
         setSessions(sessions.filter(session => session._id !== sessionId));
         setSuccess('Session terminated successfully');
       }
-    } catch (error) {
-      setError('Failed to terminate session');
+    } catch (error:unknown) {
+      const err = error as Error;
+      setError(`Failed to terminate session. ${err.message || ''}`);
     }
   };
 
@@ -182,8 +183,9 @@ export default function AccountSettings({ user }: AccountSettingsProps) {
         await fetchSessions();
         setSuccess('All other sessions terminated successfully');
       }
-    } catch (error) {
-      setError('Failed to terminate sessions');
+    } catch (error:unknown) {
+      const err = error as Error;
+      setError(`Failed to terminate sessions. ${err.message || ''}`);
     }
   };
 
@@ -390,7 +392,7 @@ export default function AccountSettings({ user }: AccountSettingsProps) {
                 </div>
                 <div className="ml-3">
                   <label htmlFor="emailOnLogin" className="text-sm font-medium text-gray-700">
-                    Email me when there's a new login
+                    Email me when there&apos;s a new login
                   </label>
                   <p className="text-sm text-gray-500">
                     Receive notifications when your account is accessed from a new device or location.

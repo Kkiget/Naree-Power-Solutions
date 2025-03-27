@@ -7,19 +7,18 @@ import { formatPrice } from '../data/utils';
 import { Order, sampleOrders } from '../data/orders';
 
 export default function OrderHistory() {
-  const [orders, setOrders] = useState<Order[]>(sampleOrders);
   const [viewingOrder, setViewingOrder] = useState<Order | null>(null);
   const [activeTab, setActiveTab] = useState<'summary' | 'tracking' | 'items'>('summary');
   const [trackingNumberSearch, setTrackingNumberSearch] = useState('');
   
   // Filter orders for the search functionality
   const filteredOrders = trackingNumberSearch 
-    ? orders.filter(order => 
+    ? sampleOrders.filter(order => 
         order.id.toLowerCase().includes(trackingNumberSearch.toLowerCase()) ||
         (order.tracking.trackingNumber && 
          order.tracking.trackingNumber.toLowerCase().includes(trackingNumberSearch.toLowerCase()))
       )
-    : orders;
+    : sampleOrders;
   
   const getStatusColor = (status: string) => {
     switch(status) {

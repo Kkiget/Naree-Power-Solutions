@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { z } from 'zod';
 import clientPromise from '@/lib/mongodb';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { ObjectId } from 'mongodb';
+import { authOptions } from '@/lib/auth';
 
 const profileSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),

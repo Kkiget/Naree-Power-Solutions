@@ -1,20 +1,25 @@
 'use client';
 
-import { createContext, useState, useContext, useEffect, ReactNode } from 'react';
+import { createContext, useState, useContext, useEffect, ReactNode, useMemo } from 'react';
 import { Product, products, Review, productReviews } from '../data/products';
 import { getCategories } from '../data/utils';
 import { Order, sampleOrders } from '../data/orders';
+
+// Cart item interface
+interface CartItem extends Product {
+  quantity: number;
+}
 
 // Define the context type
 interface ShopContextType {
   products: Product[];
   filteredProducts: Product[];
-  cart: Product[];
+  cart: CartItem[];
   wishlist: Product[];
   selectedCategory: string | null;
   searchQuery: string;
-  priceRange: [number, number]; 
-  addToCart: (product: Product) => void;
+  priceRange: [number, number];
+  addToCart: (product: Product, quantity?: number) => void;
   removeFromCart: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
@@ -23,9 +28,10 @@ interface ShopContextType {
   isInWishlist: (productId: string) => boolean;
   setSelectedCategory: (category: string | null) => void;
   setSearchQuery: (query: string) => void;
-  setPriceRange: (range: [number, number]) => void; 
+  setPriceRange: (range: [number, number]) => void;
   categories: string[];
   cartTotal: number;
+  cartItemCount: number;
   getProductReviews: (productId: string) => Review[];
   addProductReview: (review: Omit<Review, 'id' | 'helpful'>) => void;
   markReviewHelpful: (reviewId: string) => void;
@@ -50,7 +56,10 @@ interface User {
   firstName: string;
   lastName: string;
   phone: string;
-  password?: string; // Optional password field for login
+}
+
+interface AuthUser extends User {
+  password: string;
 }
 
 // Registration data interface
@@ -63,13 +72,14 @@ interface RegisterData {
 }
 
 // Sample user data (would be stored in a database in a real application)
-const sampleUsers = [
+const sampleUsers: AuthUser[] = [
   {
     id: 'user-1',
     email: 'john@example.com',
     firstName: 'John',
     lastName: 'Doe',
-    phone: '+254712345678'
+    phone: '+254712345678',
+    password: 'hashedPassword123' // In real app, this would be properly hashed
   }
 ];
 
@@ -79,16 +89,15 @@ const ShopContext = createContext<ShopContextType | undefined>(undefined);
 // Create a provider component
 export const ShopProvider = ({ children }: { children: ReactNode }) => {
   // State
-  const [cart, setCart] = useState<Product[]>([]);
+  const [cart, setCart] = useState<CartItem[]>([]);
   const [wishlist, setWishlist] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [showCart, setShowCart] = useState(false);
   const [reviews, setReviews] = useState<Record<string, Review[]>>(productReviews);
   const [helpfulReviews, setHelpfulReviews] = useState<string[]>([]);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const [orders, setOrders] = useState<Order[]>(sampleOrders);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   
   // Calculate min and max prices for initial price range
   const minPrice = Math.min(...products.map(p => p.price));
@@ -98,17 +107,27 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
   const categories = getCategories();
 
   // Derived values
-  const filteredProducts = products.filter(product => {
-    const matchesCategory = selectedCategory ? product.category === selectedCategory : true;
-    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                         product.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesPriceRange = product.price >= priceRange[0] && product.price <= priceRange[1];
-    return matchesCategory && matchesSearch && matchesPriceRange;
-  });
+  const filteredProducts = useMemo(() => 
+    products.filter(product => {
+      const matchesCategory = !selectedCategory || product.category === selectedCategory;
+      const matchesSearch = !searchQuery || 
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+        product.description.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesPriceRange = product.price >= priceRange[0] && product.price <= priceRange[1];
+      return matchesCategory && matchesSearch && matchesPriceRange;
+    }),
+    [selectedCategory, searchQuery, priceRange]
+  );
 
-  const cartTotal = cart.reduce((total, item) => {
-    return total + (item.price * (item.quantity || 1));
-  }, 0);
+  const cartItemCount = useMemo(() => 
+    cart.reduce((total, item) => total + item.quantity, 0),
+    [cart]
+  );
+
+  const cartTotal = useMemo(() => 
+    cart.reduce((total, item) => total + (item.price * item.quantity), 0),
+    [cart]
+  );
 
   // Initial data loading and localStorage interaction
   useEffect(() => {
@@ -225,18 +244,17 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // Cart functions
-  const addToCart = (product: Product) => {
+  const addToCart = (product: Product, quantity: number = 1) => {
     setCart(prevCart => {
       const existingProduct = prevCart.find(item => item.id === product.id);
       if (existingProduct) {
         return prevCart.map(item => 
           item.id === product.id 
-            ? { ...item, quantity: (item.quantity || 1) + 1 } 
+            ? { ...item, quantity: item.quantity + quantity }
             : item
         );
-      } else {
-        return [...prevCart, { ...product, quantity: 1 }];
       }
+      return [...prevCart, { ...product, quantity }];
     });
   };
 
@@ -245,10 +263,15 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const updateQuantity = (productId: string, quantity: number) => {
+    if (quantity <= 0) {
+      removeFromCart(productId);
+      return;
+    }
+    
     setCart(prevCart => 
       prevCart.map(item => 
         item.id === productId 
-          ? { ...item, quantity: Math.max(1, quantity) } 
+          ? { ...item, quantity: quantity }
           : item
       )
     );
@@ -273,52 +296,120 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
     return wishlist.some(item => item.id === productId);
   };
   
-  // Reviews functions
+  // Review functions
   const getProductReviews = (productId: string): Review[] => {
     return reviews[productId] || [];
   };
-  
-  const addProductReview = (review: Omit<Review, 'id' | 'helpful'>) => {
-    const newReview: Review = {
-      ...review,
-      id: `review-${Date.now()}`,
-      helpful: 0
-    };
-    
-    setReviews(prevReviews => {
-      const productReviews = prevReviews[review.productId] || [];
-      return {
-        ...prevReviews,
-        [review.productId]: [...productReviews, newReview]
-      };
-    });
+
+  // Review validation schema
+  const reviewSchema = {
+    minRating: 1,
+    maxRating: 5,
+    minCommentLength: 10,
+    maxCommentLength: 500
   };
-  
-  const markReviewHelpful = (reviewId: string) => {
-    if (helpfulReviews.includes(reviewId)) return;
-    
-    setHelpfulReviews(prev => [...prev, reviewId]);
-    
-    setReviews(prevReviews => {
-      const updatedReviews = { ...prevReviews };
-      
-      // Find the review in all product reviews
-      for (const productId in updatedReviews) {
-        updatedReviews[productId] = updatedReviews[productId].map(review => 
-          review.id === reviewId ? { ...review, helpful: review.helpful + 1 } : review
-        );
+
+  // Review functions
+  const addProductReview = async (review: Omit<Review, 'id' | 'helpful'>) => {
+    if (!isAuthenticated) {
+      throw new Error('You must be logged in to leave a review');
+    }
+
+    if (review.rating < reviewSchema.minRating || review.rating > reviewSchema.maxRating) {
+      throw new Error(`Rating must be between ${reviewSchema.minRating} and ${reviewSchema.maxRating}`);
+    }
+
+    if (review.comment.length < reviewSchema.minCommentLength) {
+      throw new Error(`Review must be at least ${reviewSchema.minCommentLength} characters long`);
+    }
+
+    if (review.comment.length > reviewSchema.maxCommentLength) {
+      throw new Error(`Review cannot exceed ${reviewSchema.maxCommentLength} characters`);
+    }
+
+    try {
+      const response = await fetch('/api/reviews', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...review,
+          userId: currentUser?.id,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit review');
       }
+
+      const newReview = await response.json();
       
-      return updatedReviews;
-    });
+      setReviews(prevReviews => ({
+        ...prevReviews,
+        [review.productId]: [...(prevReviews[review.productId] || []), newReview]
+      }));
+
+      return newReview;
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new Error(`Failed to submit review: ${error.message}`);
+      }
+      throw new Error('Failed to submit review');
+    }
   };
-  
+
+  const markReviewHelpful = async (reviewId: string) => {
+    if (!isAuthenticated) {
+      throw new Error('You must be logged in to mark a review as helpful');
+    }
+
+    if (helpfulReviews.includes(reviewId)) {
+      throw new Error('You have already marked this review as helpful');
+    }
+
+    try {
+      const response = await fetch(`/api/reviews/${reviewId}/helpful`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to mark review as helpful');
+      }
+
+      setHelpfulReviews(prev => [...prev, reviewId]);
+      
+      setReviews(prevReviews => {
+        const updatedReviews = { ...prevReviews };
+        
+        for (const productId in updatedReviews) {
+          updatedReviews[productId] = updatedReviews[productId].map(review => 
+            review.id === reviewId ? { ...review, helpful: review.helpful + 1 } : review
+          );
+        }
+        
+        return updatedReviews;
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new Error(`Failed to mark review as helpful: ${error.message}`);
+      }
+      throw new Error('Failed to mark review as helpful');
+    }
+  };
+
   const getAverageRating = (productId: string): number => {
     const productReviews = reviews[productId] || [];
     if (productReviews.length === 0) return 0;
     
     const totalRating = productReviews.reduce((sum, review) => sum + review.rating, 0);
-    return Number((totalRating / productReviews.length).toFixed(1));
+    const average = totalRating / productReviews.length;
+    
+    // Round to nearest 0.5
+    return Math.round(average * 2) / 2;
   };
 
   // User authentication functions
@@ -326,16 +417,26 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
   // Login function
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
-      // Type assertion for sample users that include password
-      const user = (sampleUsers as Array<User & { password: string }>)
-        .find(u => u.email === email && u.password === password);
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        return false;
+      }
+
+      const data = await response.json();
+      const { user } = data;
       
       if (!user) {
         return false;
       }
-      
-      const { password: _, ...userWithoutPassword } = user;
-      setCurrentUser(userWithoutPassword);
+
+      setCurrentUser(user);
       setIsAuthenticated(true);
       return true;
     } catch (error) {
@@ -353,7 +454,6 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
   // Register function
   const register = async (userData: RegisterData): Promise<boolean> => {
     try {
-      // Simulate API call
       const response = await fetch('/api/auth/register', {
         method: 'POST',
         headers: {
@@ -363,14 +463,18 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
       });
 
       if (!response.ok) {
-        throw new Error('Registration failed');
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Registration failed');
       }
 
-      const result = await response.json();
-      setCurrentUser(result.user);
+      const { user } = await response.json();
+      setCurrentUser(user);
       setIsAuthenticated(true);
-      return true; // Return success status
+      return true;
     } catch (error) {
+      if (error instanceof Error) {
+        throw new Error(`Registration failed. ${error.message}`);
+      }
       throw new Error('Registration failed. Please try again.');
     }
   };
@@ -390,13 +494,13 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
   // Get all orders
   const getOrders = () => {
     if (!isAuthenticated) return [];
-    return orders.filter(order => order.userId === currentUser?.id);
+    return sampleOrders.filter(order => order.userId === currentUser?.id);
   };
   
   // Get order by ID
   const getOrderById = (orderId: string) => {
     if (!isAuthenticated) return undefined;
-    return orders.find(order => order.id === orderId && order.userId === currentUser?.id);
+    return sampleOrders.find(order => order.id === orderId && order.userId === currentUser?.id);
   };
 
   // Create the context value
@@ -420,6 +524,7 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
     setPriceRange,
     categories,
     cartTotal,
+    cartItemCount,
     getProductReviews,
     addProductReview,
     markReviewHelpful,

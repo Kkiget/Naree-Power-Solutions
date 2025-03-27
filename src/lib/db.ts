@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb'
 
 let cachedClient: MongoClient | null = null
-let cachedDb: any | null = null
+let cachedDb: unknown | null = null
 
 export async function connectToDatabase() {
   if (cachedClient && cachedDb) {

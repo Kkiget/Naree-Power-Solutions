@@ -89,8 +89,9 @@ export default function SignUp() {
       // This would be replaced with your actual API call
       await new Promise(resolve => setTimeout(resolve, 1500));
       setSignupSuccess(true);
-    } catch (error) {
-      setErrors({ form: 'An error occurred. Please try again.' });
+    } catch (error:unknown) {
+      const err = error as Error;
+      setErrors({ form: `An error occurred. Please try again. ${err.message || ''}` });
     } finally {
       setIsSubmitting(false);
     }
@@ -101,7 +102,7 @@ export default function SignUp() {
       <div className="bg-white p-8 rounded-lg shadow-md max-w-md mx-auto text-center">
         <div className="text-green-600 mb-4 text-5xl">✓</div>
         <h2 className="text-2xl font-bold mb-4">Account Created Successfully!</h2>
-        <p className="text-gray-600 mb-6">Thank you for joining Naree Power Solutions. We've sent a verification email to your inbox.</p>
+        <p className="text-gray-600 mb-6">Thank you for joining Naree Power Solutions. We&apos;ve sent a verification email to your inbox.</p>
         <Link 
           href="/signin" 
           className="block bg-orange-600 text-white py-3 px-6 rounded hover:bg-orange-700 transition-colors"

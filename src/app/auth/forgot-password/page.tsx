@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { AppError } from '@/types/errors';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
@@ -28,9 +29,10 @@ export default function ForgotPasswordPage() {
         setStatus('error');
         setMessage(data.message || 'Something went wrong. Please try again.');
       }
-    } catch (error) {
+    } catch (error: unknown) {
       setStatus('error');
-      setMessage('An error occurred. Please try again.');
+      const err = error as AppError;
+      setMessage(`An error occurred. Please try again. ${err.message || ''}`);
     }
   };
 

@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import clientPromise from '@/lib/mongodb';
 import { withRateLimit } from '@/lib/rate-limit';
 import { ObjectId } from 'mongodb';
 import { z } from 'zod';
+import { authOptions } from '@/lib/auth';
 
 const notificationSchema = z.object({
   emailOnLogin: z.boolean(),
