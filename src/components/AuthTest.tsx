@@ -12,7 +12,7 @@ export default function AuthTest() {
       const res = await fetch('/api/user/profile');
       const data = await res.json();
       setApiResponse(JSON.stringify(data, null, 2));
-    } catch (error) {
+    } catch {
       setApiResponse('Error accessing protected API');
     }
   };

@@ -29,7 +29,7 @@ export const ROLES = {
 export type Role = keyof typeof ROLES
 
 // Define all possible permissions
-const ALL_PERMISSIONS = [
+export const ALL_PERMISSIONS = [
   'read:own_profile',
   'update:own_profile',
   'create:orders',
