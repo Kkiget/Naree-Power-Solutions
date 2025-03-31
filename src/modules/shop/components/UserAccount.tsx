@@ -98,7 +98,7 @@ export default function UserAccount() {
             <Link
               href="/account?tab=orders"
               className={`block px-4 py-2 text-sm font-medium rounded-md ${
-                activeTab === 'orders' ? 'bg-orange-50 text-orange-600' : 'text-gray-700 hover:bg-gray-50'
+                activeTab === 'orders' ? 'bg-orange-50 text-black' : 'text-black hover:bg-gray-50'
               }`}
             >
               <FaShoppingBag className="inline-block mr-2" /> Orders
@@ -106,7 +106,7 @@ export default function UserAccount() {
             <Link
               href="/account?tab=wishlist"
               className={`block px-4 py-2 text-sm font-medium rounded-md ${
-                activeTab === 'wishlist' ? 'bg-orange-50 text-orange-600' : 'text-gray-700 hover:bg-gray-50'
+                activeTab === 'wishlist' ? 'bg-orange-50 text-black' : 'text-black hover:bg-gray-50'
               }`}
             >
               <FaHeart className="inline-block mr-2" /> Wishlist ({wishlist.length})
@@ -114,7 +114,7 @@ export default function UserAccount() {
             <Link
               href="/account?tab=reviews"
               className={`block px-4 py-2 text-sm font-medium rounded-md ${
-                activeTab === 'reviews' ? 'bg-orange-50 text-orange-600' : 'text-gray-700 hover:bg-gray-50'
+                activeTab === 'reviews' ? 'bg-orange-50 text-black' : 'text-black hover:bg-gray-50'
               }`}
             >
               <FaCommentAlt className="inline-block mr-2" /> Reviews
@@ -122,7 +122,7 @@ export default function UserAccount() {
             <Link
               href="/account?tab=settings"
               className={`block px-4 py-2 text-sm font-medium rounded-md ${
-                activeTab === 'settings' ? 'bg-orange-50 text-orange-600' : 'text-gray-700 hover:bg-gray-50'
+                activeTab === 'settings' ? 'bg-orange-50 text-black' : 'text-black hover:bg-gray-50'
               }`}
             >
               <FaCog className="inline-block mr-2" /> Settings

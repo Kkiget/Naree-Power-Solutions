@@ -1,6 +1,6 @@
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
-import DashboardNav from '@/components/dashboard/DashboardNav';
+import ShopNavigation from '@/modules/shop/components/ShopNavigation';
 import { authOptions } from '@/lib/auth';
 
 export default async function DashboardLayout({
@@ -15,7 +15,7 @@ export default async function DashboardLayout({
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <DashboardNav user={session.user} />
+      <ShopNavigation user={session.user} />
       <main className="container mx-auto px-4 py-8">
         {children}
       </main>

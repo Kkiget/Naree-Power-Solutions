@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useShop } from '../context/ShopContext';
 
-export default function ShopNavigation() {
+export default function ShopNavigation({ user }: { user: { id: string; role: string; name?: string | null; email?: string | null; image?: string | null; } }) {
   const { categories } = useShop();
 
   return (
